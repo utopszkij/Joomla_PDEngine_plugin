@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fields>
+
+		<field
+			name="id"
+			type="hidden"
+			default="0"
+			required="true"
+			readonly="true"/>							
+															
+		<field
+			id="config_type"
+			name="config_type"
+			type="list"
+			required="true"
+			label="PVOKS_CONFIG_TYPE"
+			description="PVOKS_CONFIG_TYPE_DESC"
+			class="inputbox">
+			<option value="global">PVOKS_CONFIG_GLOBAL</option>	
+			<option value="category">PVOKS_CONFIG_CATEGORY</option>	
+			<option value="question">PVOKS_CONFIG_QUESTION</option>	
+		</field>						
+						
+		<field
+			id="title"
+			name="title"
+			type="text"
+			required="true"
+			label="PVOKS_CONFIG_TITLE"
+			description="PVOKS_CONFIG_TITLE_DESC"	/>
+															
+		<field
+			id="json"
+			name="json"
+			type="textarea"
+			required="true"
+			label="PVOKS_CONFIG_JSON"
+			description="PVOKS_CONFIG_JSON_DESC"
+			class="inputbox"
+			size="40" cols="80" rows="10" />						
+								
+														
+		<field
+			id="created"
+			name="created"
+			type="text"
+			required="false"
+			readonly="true"
+			label="PVOKS_CREATED"
+			description=""
+			class="inputbox"
+			size="40"/>						
+								
+														
+		<field
+			id="created_by"
+			name="created_by"
+			type="sql"
+			query="select id as value, username as created_by from #__users union all select 0,'' order by 2"
+			required="false"
+			readonly="true"
+			label="PVOKS_CREATED_BY"
+			description=""
+			class="inputbox"
+			size="1"/>						
+
+		<field
+			id="modified"
+			name="modified"
+			type="text"
+			required="false"
+			readonly="true"
+			label="PVOKS_MODIFIED"
+			description=""
+			class="inputbox"
+			size="40"/>						
+								
+														
+		<field
+			id="modified_by"
+			name="modified_by"
+			type="sql"
+			query="select id as value, username as modified_by from #__users union all select 0,'' order by 2"
+			required="false"
+			readonly="true"
+			label="PVOKS_MODIFIED_BY"
+			description=""
+			class="inputbox"
+			size="1"/>						
+				
+		<field
+			id="state"
+			name="state"
+			type="list"
+			required="true"
+			label="PVOKS_STATE"
+			description=""
+			class="inputbox">						
+			<option value="1">PVOKS_PUBLISHED</option>
+			<option value="0">PVOKS_UNPUBLISHED</option>
+		</field>						
+	</fields>	
+</form>	

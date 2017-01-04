@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fields>
+
+		<field
+			name="id"
+			type="hidden"
+			default="0"
+			required="true"
+			readonly="true"/>							
+															
+		<field
+			id="parent_id"
+			name="parent_id"
+			type="sql"
+			query="select id as value, title as parent_id from #__pvoks_categories union all select 0,'root' order by 2"
+			required="true"
+			label="PVOKS_CATEGORY_PARENT_ID"
+			description="PVOKS_CATEGORY_PARENT_ID_DESC"
+			class="inputbox" />
+
+		<field
+			id="category_type"
+			name="category_type"
+			type="sql"
+			query="select id as value, title as category_type from #__pvoks_configs where config_type='category' order by 2"
+			required="true"
+			label="PVOKS_CATEGORY_TYPE"
+			description="PVOKS_CATEGORY_TYPE_DESC"
+			class="inputbox" />
+						
+		<field
+			id="title"
+			name="title"
+			type="text"
+			required="true"
+			label="PVOKS_CATEGORIES_TITLE"
+			description="PVOKS_CATEGORIES_TITLE_DESC"
+			size="120"	/>
+															
+		<field
+			id="alias"
+			name="alias"
+			type="text"
+			required="false"
+			label="PVOKS_CATEGORIES_ALIAS"
+			description="PVOKS_CATEGORIES_ALIAS_DESC"
+			class="inputbox"
+			size="40" cols="80" rows="10" />						
+								
+		<field
+			id="text"
+			name="text"
+			type="editor"
+			required="false"
+			label="PVOKS_CATEGORIES_TEXT"
+			description="PVOKS_CATEGORIES_TEXT_DESC"
+			class="inputbox"
+			width="800px" height="600px" />						
+			
+		<field
+			id="state"
+			name="state"
+			type="list"
+			required="true"
+			label="PVOKS_STATE"
+			description=""
+			class="inputbox">						
+			<option value="2">PVOKS_CLOSED</option>
+			<option value="1">PVOKS_PUBLISHED</option>
+			<option value="0">PVOKS_UNPUBLISHED</option>
+		</field>						
+			
+														
+		<field
+			id="created"
+			name="created"
+			type="text"
+			required="false"
+			readonly="true"
+			label="PVOKS_CREATED"
+			description=""
+			class="inputbox"
+			size="40"/>						
+								
+														
+		<field
+			id="created_by"
+			name="created_by"
+			type="sql"
+			query="select id as value, username as created_by from #__users union all select 0,'' order by 2"
+			required="false"
+			readonly="true"
+			label="PVOKS_CREATED_BY"
+			description=""
+			class="inputbox"
+			size="1"/>						
+
+		<field
+			id="modified"
+			name="modified"
+			type="text"
+			required="false"
+			readonly="true"
+			label="PVOKS_MODIFIED"
+			description=""
+			class="inputbox"
+			size="40"/>						
+								
+														
+		<field
+			id="modified_by"
+			name="modified_by"
+			type="sql"
+			query="select id as value, username as modified_by from #__users union all select 0,'' order by 2"
+			required="false"
+			readonly="true"
+			label="PVOKS_MODIFIED_BY"
+			description=""
+			class="inputbox"
+			size="1"/>						
+				
+	</fields>	
+</form>	

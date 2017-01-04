@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fields>
+
+		<field
+			name="id"
+			type="hidden"
+			default="0"
+			required="true"
+			readonly="true"/>							
+															
+		<field
+			id="category_id"
+			name="category_id"
+			type="sql"
+			query="select id as value, title as category_id from #__pvoks_categories order by 2"
+			required="true"
+			label="PVOKS_CATEGORY_ID"
+			description=""
+			class="inputbox" />
+			
+		<field
+			id="user_id"
+			name="user_id"
+			type="sql"
+			query="select id as value, name as user_id from #__users order by 2"
+			required="true"
+			label="PVOKS_USER_ID"
+			description=""
+			class="inputbox" />
+						
+		<field
+			id="admin"
+			name="admin"
+			type="list"
+			required="true"
+			label="PVOKS_MEMBERS_ADMIN"
+			description=""
+			class="inputbox">						
+			<option value="1">PVOKS_YES</option>
+			<option value="0">PVOKS_NO</option>
+		</field>						
+
+		<field
+			id="state"
+			name="state"
+			type="list"
+			required="true"
+			label="PVOKS_STATE"
+			description=""
+			class="inputbox">						
+			<option value="0">PVOKS_MEMBERS_DISABLED</option>
+			<option value="1">PVOKS_MEMBERS_SUGGESTION</option>
+			<option value="2">PVOKS_MEMBERS_MEMBER</option>
+			<option value="3">PVOKS_MEMBERS_ACREDITED</option>
+		</field>						
+						
+		<field
+			id="created"
+			name="created"
+			type="text"
+			required="false"
+			readonly="true"
+			label="PVOKS_CREATED"
+			description=""
+			class="inputbox"
+			size="40"/>						
+								
+														
+		<field
+			id="created_by"
+			name="created_by"
+			type="sql"
+			query="select id as value, username as created_by from #__users union all select 0,'' order by 2"
+			required="false"
+			readonly="true"
+			label="PVOKS_CREATED_BY"
+			description=""
+			class="inputbox"
+			size="1"/>						
+
+		<field
+			id="modified"
+			name="modified"
+			type="text"
+			required="false"
+			readonly="true"
+			label="PVOKS_MODIFIED"
+			description=""
+			class="inputbox"
+			size="40"/>						
+								
+														
+		<field
+			id="modified_by"
+			name="modified_by"
+			type="sql"
+			query="select id as value, username as modified_by from #__users union all select 0,'' order by 2"
+			required="false"
+			readonly="true"
+			label="PVOKS_MODIFIED_BY"
+			description=""
+			class="inputbox"
+			size="1"/>						
+								
+														
+	</fields>	
+</form>	

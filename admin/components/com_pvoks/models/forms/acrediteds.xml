@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fields>
+
+		<field
+			name="id"
+			type="hidden"
+			default="0"
+			required="true"
+			readonly="true"/>							
+															
+		<field
+			id="category_id"
+			name="category_id"
+			type="sql"
+			query="select id as value, title as category_id from #__pvoks_categories order by 2"
+			required="true"
+			label="PVOKS_CATEGORY_ID"
+			description=""
+			class="inputbox" />
+			
+		<field
+			id="user_id"
+			name="user_id"
+			type="sql"
+			query="select id as value, name as user_id from #__users order by 2"
+			required="true"
+			label="PVOKS_USER_ID"
+			description=""
+			class="inputbox" />
+
+		<field
+			id="acredited_id"
+			name="acredited_id"
+			type="sql"
+			query="select id as value, name as acredited_id from #__users order by 2"
+			required="true"
+			label="PVOKS_ACREDITED_ID"
+			description=""
+			class="inputbox" />
+		
+		<field
+			id="terminate"
+			name="terminate"
+			type="calendar"
+			required="true"
+			readonly="false"
+			label="PVOKS_ACREDITED_TERMINATE"
+			description="PVOKS_ACREDITED_TERMINATE_DESC"
+			class="inputbox"
+			size="40"/>						
+
+		
+		<field
+			id="created"
+			name="created"
+			type="text"
+			required="false"
+			readonly="true"
+			label="PVOKS_CREATED"
+			description=""
+			class="inputbox"
+			size="40"/>						
+														
+		<field
+			id="modified"
+			name="modified"
+			type="text"
+			required="false"
+			readonly="true"
+			label="PVOKS_MODIFIED"
+			description=""
+			class="inputbox"
+			size="40"/>						
+														
+	</fields>	
+</form>	
