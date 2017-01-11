@@ -46,7 +46,8 @@ class PvoksModelMembers extends PvoksModel {
 		$query->leftjoin('#__pvoks_categories as c on c.id = a.category_id');
 		// Filter by search
 		if (!empty($search)){
-			$query->where('((a.username like "%'.$search.'%") or (u.name like "%'.$search.'%"))');
+			$query->where('((u.username like "%'.$search.'%") or (u.name like "%'.$search.'%") or 
+			(c.title like "%'.$search.'%"))');
 		}
 		if ($filter_category_id > 0) {
 			$query->where('(a.category_id = '.$db->quote($filter_category_id).')');
@@ -56,9 +57,7 @@ class PvoksModelMembers extends PvoksModel {
 		}
 		// Add list oredring and list direction to SQL query
 		$query->order($db->escape($sort).' '.$db->escape($order));
-		
-		echo $query;
-		
+		//DBG echo $query;
 		return $query;
 	}
 	

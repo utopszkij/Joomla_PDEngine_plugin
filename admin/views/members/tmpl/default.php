@@ -24,14 +24,20 @@ $pvoksHelper->echoControlPanel();
 <div class="pvoksForm">
 <form action="<?php echo JRoute::_('index.php?option=com_pvoks&view=categories'); ?>" method="get" name="adminForm" id="adminForm">
     <div class="filterForm">
+	  <div class="control-group">
+	   <label><?php echo JText::_('PVOKS_FILTER'); ?></label>
 	   <input type="text" class="filterStr" size="40" name="filter_str" value="<?php echo $input->get('filter_str','','string'); ?>" />
-	   <?php echo JText::_('PVOKS_CATEGORY_ID'); ?>:
-	   <select name="filter_category_id">
+	  </div>
+	  <div class="control-group">
+	   <label><?php echo JText::_('PVOKS_CATEGORY_ID'); ?>:</label>
+	   <select name="filter_category_id" style="width:330px; max-width:330px;">
 	     <option value="0"<?php if($input->get('filter_category_id',0)==0) echo ' selected="selected"'; ?>><?php echo JText::_('PVOKS_ALL'); ?></option>
          <?php $pvoksHelper->echoCategoryOptions(0, '-&nbsp;', $input->get('filter_category_id',0)); ?>
 	   </select>
-	   <?php echo JText::_('PVOKS_MEMBERS_NAME'); ?>:
-	   <select name="filter_user_id">
+	  </div>
+	  <div class="control-group">
+	   <label><?php echo JText::_('PVOKS_USER_ID'); ?>:</label>
+	   <select name="filter_user_id" style="max-width:200px">
 	     <option value="0"<?php if($input->get('filter_user_id',0)==0) echo ' selected="selected"'; ?>><?php echo JText::_('PVOKS_ALL'); ?></option>
 		 <?php 
 		 $db->setQuery('select id,name from #__users order by name');
@@ -43,11 +49,15 @@ $pvoksHelper->echoControlPanel();
 		 </option>
 		 <?php endforeach; ?>
 	   </select>
-	   <button type="submit" name="newfilter" value="1" class="btn hasTooltip" title="szűrés start"><i class="icon-search"></i></button>
+	  </div>
+	  <div class="control-buttons">
+	   <button type="submit" name="newfilter" value="1" class="btn hasTooltip" title="<?php echo JText::_('PVOKS_FILTER_START'); ?>"><i class="icon-search"></i></button>
 	   <button type="submit" name="clrfilter" value="1" class="btn hasTooltip" 
-	     onclick="document.forms.adminForm.filter_str.value=''; document.forms.adminForm.filter_nyito.checked = false; document.forms.adminForm.filter_terszerv.options[0].selected = true; true;" 
-		 title="szürés törlése"><i class="icon-remove"></i></button>
+	     onclick="var f=document.forms.adminForm; f.filter_str.value=''; f.filter_category_id.value=0; f.filter_acredited_id.value = 0; f.filter_user_id.value=0; true;" 
+		 title="<?php echo JText::_('PVOKS_FILTER_CLEAR'); ?>"><i class="icon-remove"></i></button>
+	  </div>	 
 	</div>
+	
 	<?php if (empty($this->items)) : ?>
 		<div class="alert alert-no-items"><?php echo JText::_('PVOKS_NO_DATA'); ?></div>
 	<?php else : ?>
@@ -78,6 +88,7 @@ $pvoksHelper->echoControlPanel();
 				<th class="nowrap left">
 					<?php $pvoksHelper->echoColHeader('PVOKS_MEMBERS_ADMIN','a.admin', $listDirn, $listOrder); ?>
 				</th>
+				<th></th>
 			</tr>
 		</thead>
 				
@@ -113,7 +124,12 @@ $pvoksHelper->echoControlPanel();
 				</td>
 				<td class="left"><?php echo $item->state; ?></td>
 				<td class="left"><?php echo $item->admin; ?></td>
-				<td class="left"></td>
+				<td class="left">
+				  <a href="<?php echo JURI::base(); ?>index.php?option=com_pvoks&view=supports&filter=member.<?php echo $item->id; ?>" 
+				     class="btn" title="<?php echo JText::_('PVOKS_SUPPORTS_LIST'); ?>">
+					 <i class="icon-ok"></i>
+				  </a>&nbsp;
+				</td>
 			</tr>
 		<?php endforeach ?>
 		</tbody>

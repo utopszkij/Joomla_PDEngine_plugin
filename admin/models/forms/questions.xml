@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fields>
+
+		<field
+			name="id"
+			type="hidden"
+			default="0"
+			required="true"
+			readonly="true"/>							
+															
+		<field
+			id="category_id"
+			name="category_id"
+			type="sql"
+			query="select id as value, title as category_id from #__pvoks_categories order by 2"
+			required="true"
+			label="PVOKS_CATEGORY_ID"
+			description=""
+			class="inputbox" />
+
+		<field
+			id="question_type"
+			name="question_type"
+			type="sql"
+			query="select id as value, title as question_type from #__pvoks_configs where config_type='question' order by 2"
+			required="true"
+			label="PVOKS_QUESTION_TYPE"
+			description=""
+			class="inputbox" />
+			
+		<field
+			id="title"
+			name="title"
+			type="text"
+			required="true"
+			label="PVOKS_QUESTION_TITLE"
+			description=""
+			class="inputbox" 
+			size="120" />
+
+		<field
+			id="alias"
+			name="alias"
+			type="text"
+			required="false"
+			label="PVOKS_QUESTION_ALIAS"
+			description=""
+			class="inputbox" 
+			size="120" />
+
+		<field
+			id="text"
+			name="text"
+			type="editor"
+			required="false"
+			label="PVOKS_QUESTION_TEXT"
+			description=""
+			class="inputbox" />
+
+		<field
+			id="state"
+			name="state"
+			type="text"
+			required="true"
+			label="PVOKS_QUESTION_STATE"
+			description="PVOKS_QUESTION_STATE_DESC"
+			class="inputbox" 
+			size="2" />
+		
+		<field
+			id="publicvote"
+			name="publicvote"
+			type="list"
+			required="true"
+			label="PVOKS_QUESTION_PUBLICVOTE"
+			description=""
+			class="inputbox">						
+			<option value="1">PVOKS_YES</option>
+			<option value="0">PVOKS_NO</option>
+		</field>						
+		
+		<field
+			id="acredite_enabled"
+			name="acredite_enabled"
+			type="list"
+			required="true"
+			label="PVOKS_QUESTION_ACREDITE_ENABLED"
+			description=""
+			class="inputbox">						
+			<option value="1">PVOKS_YES</option>
+			<option value="0">PVOKS_NO</option>
+		</field>						
+		
+		<field
+			id="target_category_id"
+			name="target_category_id"
+			type="sql"
+			query="select id as value, title as target_category_id from #__pvoks_categories order by 2"
+			required="true"
+			label="PVOKS_TARGET_CATEGORY_ID"
+			description="PVOKS_TARGET_CATEGORY_ID_DESC"
+			class="inputbox" />
+		
+		<field
+			id="termins"
+			name="termins"
+			type="textarea"
+			required="false"
+			label="PVOKS_QUESTION_TERMINS"
+			description="PVOKS_QUESTION_TERMINS_DESC"
+			class="inputbox" 
+			cols="100" rows="5" />
+
+		<field
+			id="optvalid"
+			name="optvalid"
+			type="text"
+			required="false"
+			label="PVOKS_QUESTION_OPTVALID"
+			description="PVOKS_QUESTION_OPTVALID_DESC"
+			class="inputbox" 
+			size="120" />
+
+		<field
+			id="debatevalid"
+			name="debatevalid"
+			type="text"
+			required="false"
+			label="PVOKS_QUESTION_DEBATEVALID"
+			description="PVOKS_QUESTION_DEBATEVALID_DESC"
+			class="inputbox" 
+			size="120" />
+	
+		<field
+			id="votevalid"
+			name="votevalid"
+			type="text"
+			required="false"
+			label="PVOKS_QUESTION_VOTEVALID"
+			description="PVOKS_QUESTION_VOTEVALID_DESC"
+			class="inputbox" 
+			size="120" />
+						
+		<field
+			id="created"
+			name="created"
+			type="text"
+			required="false"
+			readonly="true"
+			label="PVOKS_CREATED"
+			description=""
+			class="inputbox"
+			size="40"/>						
+					
+														
+		<field
+			id="created_by"
+			name="created_by"
+			type="sql"
+			query="select id as value, username as created_by from #__users union all select 0,'' order by 2"
+			required="false"
+			readonly="true"
+			label="PVOKS_CREATED_BY"
+			description=""
+			class="inputbox"
+			size="1"/>						
+
+		<field
+			id="modified"
+			name="modified"
+			type="text"
+			required="false"
+			readonly="true"
+			label="PVOKS_MODIFIED"
+			description=""
+			class="inputbox"
+			size="40"/>						
+								
+														
+		<field
+			id="modified_by"
+			name="modified_by"
+			type="sql"
+			query="select id as value, username as modified_by from #__users union all select 0,'' order by 2"
+			required="false"
+			readonly="true"
+			label="PVOKS_MODIFIED_BY"
+			description=""
+			class="inputbox"
+			size="1"/>						
+								
+														
+	</fields>	
+</form>	

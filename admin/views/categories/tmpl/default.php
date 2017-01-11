@@ -53,6 +53,7 @@ $pvoksHelper->echoControlPanel();
 				<th class="nowrap left">
 					<?php $pvoksHelper->echoColHeader('PVOKS_CATEGORY_TREE','a.tree', $listDirn, $listOrder); ?>
 				</th>
+				<th></th>
 			</tr>
 		</thead>
 				
@@ -62,7 +63,9 @@ $pvoksHelper->echoControlPanel();
 			$link = ''; 
 			if ($item->state == 0) $item->state = '<i class="icon-delete"></i>'.JText::_('PVOKS_UNPUBLISHED');	
 			if ($item->state == 1) $item->state = '<i class="icon-ok"></i>'.JText::_('PVOKS_PUBLISHED');	
-			if ($item->state == 2) $item->state = '<i class="icon-lock"></i>'.JText::_('PVOKS_CLOSED');	
+			if ($item->state == 2) $item->state = '<i class="icon-lock"></i>'.JText::_('PVOKS_CLOSED');
+			$src = $pvoksHelper->getImgSrc($item->introtext);
+			$src = str_replace('src="images','src="'.JURI::root().'images',$src);			
 		?>
 		
 			<tr class="row<?php echo $i % 2; ?>">
@@ -77,11 +80,30 @@ $pvoksHelper->echoControlPanel();
 				</td>
 				<td class="right"><?php echo $this->escape($item->parent_id); ?></td>
 				<td class="left">
+				  <?php if ($src != '') echo '<img style="height:30px; margin:2px; float:left" '.$src.' />'; ?>
 				  <?php echo $this->escape($item->title); ?><br />
 				  <i><?php echo $this->escape($item->alias); ?></i>
 				</td>
 				<td class="left"><?php echo $item->state; ?></td>
-				<td class="left"></td>
+				<td></td>
+				<td class="left">
+				  <a href="<?php echo JURI::base(); ?>index.php?option=com_pvoks&view=members&filter_category_id=<?php echo $item->id; ?>" 
+				     class="btn" title="<?php echo JText::_('PVOKS_MEMBERS'); ?>">
+					 <i class="icon-users"></i>
+				  </a>&nbsp;
+				  <a href="<?php echo JURI::base(); ?>index.php?option=com_pvoks&view=acrediteds&filter_category_id=<?php echo $item->id; ?>" 
+				     class="btn" title="<?php echo JText::_('PVOKS_ACREDITEDS'); ?>">
+					 <i class="icon-next"></i>
+				  </a>&nbsp;
+				  <a href="<?php echo JURI::base(); ?>index.php?option=com_pvoks&view=questions&filter_category_id=<?php echo $item->id; ?>" 
+				     class="btn" title="<?php echo JText::_('PVOKS_QUESTIONS'); ?>">
+					 <i class="icon-help"></i>
+				  </a>&nbsp;
+				  <a href="<?php echo JURI::base(); ?>index.php?option=com_pvoks&view=supports&filter=category.<?php echo $item->id; ?>" 
+				     class="btn" title="<?php echo JText::_('PVOKS_SUPPORTS_LIST'); ?>">
+					 <i class="icon-ok"></i>
+				  </a>&nbsp;
+				</td>
 			</tr>
 		<?php endforeach ?>
 		</tbody>

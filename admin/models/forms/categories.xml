@@ -71,6 +71,17 @@
 			<option value="0">PVOKS_UNPUBLISHED</option>
 		</field>						
 			
+		<field
+			id="questvalid"
+			name="questvalid"
+			type="text"
+			required="false"
+			readonly="false"
+			label="PVOKS_CATEGORY_QESTVALID"
+			description="PVOKS_CATEGORY_QUESTVALID_DESC"
+			class="inputbox"
+			size="40"/>						
+			
 														
 		<field
 			id="created"

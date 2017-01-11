@@ -85,6 +85,16 @@ $pvoksHelper = new PvoksHelper();
 
 				<div class="control-group">
 					<div class="control-label">					
+						<?php echo $this->form->getLabel('questvalid'); ?>
+					</div>
+					
+					<div class="controls">	
+						<?php echo $this->form->getInput('questvalid');  ?>
+					</div>
+				</div>		
+
+				<div class="control-group">
+					<div class="control-label">					
 						<?php echo $this->form->getLabel('created'); ?>
 					</div>
 					

@@ -5,6 +5,13 @@ $input = JFactory::getApplication()->input;
 JHtml::_('behavior.tooltip');
 ?>
 
+<style type="text/css">
+.akcioChk {display:inline-block; width:250px;}
+fieldset {display:inline-block; width:260px; margin-top:10px;}
+</style>
+
+<script src="<?php echo JURI::root(); ?>media/jui/js/jquery.ui.core.min.js" type="text/javascript"></script>
+<script src="<?php echo JURI::root(); ?>media/jui/js/jquery.ui.sortable.min.js" type="text/javascript"></script>
 <div style="clear:both"></div>
 <h2><i class="icon-tools"></i>&nbsp;<?php echo $this->title; ?></h2>
 <div style="clear:both"></div>
@@ -16,7 +23,8 @@ JHtml::_('behavior.tooltip');
 <?php endforeach; ?>
 </div>
 <div style="clear:both"><br /></div>
-<form method="post" action="<?php echo JRoute::_('index.php?option=com_pvoks&view=configs&id='.(int) $this->item->id);  ?>" id="adminForm" name="adminForm">
+<form method="post" action="<?php echo JRoute::_('index.php?option=com_pvoks&view=configs&id='.(int) $this->item->id);  ?>" 
+      id="adminForm" name="adminForm" onsubmit="JSONEditor.scrToTXT(); true;">
 	 	<div class="col <?php if(version_compare(JVERSION,'3.0','lt')):  ?>width-60  <?php endif; ?>span8 form-horizontal fltlft">
 		  <fieldset class="adminform">
 				<div class="control-group">
@@ -39,6 +47,13 @@ JHtml::_('behavior.tooltip');
 					</div>
 				</div>		
 
+				
+				<div id="questionConfig">
+				  <ul id="ulSteps">
+				  </ul>
+				  <button type="button" id="addStep" title="add step"><i class="icon-plus"></i>Add step</button>&nbsp;
+				</div>				
+				
 				<div class="control-group">
 					<div class="control-label">					
 						<?php echo $this->form->getLabel('json'); ?>
@@ -124,20 +139,6 @@ JHtml::_('behavior.tooltip');
 <div class="info">
 <pre><code>
 
-json global és "category" esetén
---------------------------------
-	{"defCategorySuggestiion":Y/N,
-	 "defQuestionSuggestion":Y/N,
-	 "defOptionSuggestion":Y/N,
-	 "defMemberSuggestion":Y/N,
-	 "defQuestionType":szám,
-	 "acrediteEnabled": Y/N,
-	 "groupactions":["group" => ["xxxx","xxxx",......]
-	 "scripts":["event" => "script_id",...],
-	 "lngStrings":["token" => "xxxxxx",....]
-	}
-
-
 json a question_type esetén:
 ----------------------------
 	{"steps":{"title":"xxxxxx", "groupactions":["group" => ["xxxx","xxxx",......],"termin":"szám vagy képlet"]},
@@ -172,7 +173,7 @@ view-sugestion Ötletek listájának és bővebb leírásának megtekintése
 view-alternative  Alternatívák listájának és bővebb leírásának a megtekintése
 view-creator-nick 	Az ötlet beküldő nick nevének megjelenítése
 view-creator-name  	Az ötlet beküldő valódi nevének megjelenítése
-view-comment  A szavazáshoz tartozó kommentek megjelenítése. Ez egy “gyári” joomla extension,  a “nick” nevet jeleniti meg a kommenteknél.
+view-comment  A szavazáshoz tartozó kommentek megjelenítése. 
 view-vokscount  A leadott szavazatok számának kijelzése
 view-result  A szavazás eredményének vagy pillanatnyi részeredményének megjelenitése (alternativák condorcet sorrendben).
 
@@ -192,10 +193,11 @@ category-merge  Két alternatíva összevonása
 question-suggestion-edit  Ötlet modosítása (ha ez a lehetőség adott akkor adminok minden suggestiont, mások csak a saját maguk által feltöltöttet módosíthatnak)
 question-suggestion-delete  Ötlet törlése (ha ez a lehetőség adott akkor adminok minden suggestiont, mások csak a saját maguk által feltöltöttet törölhetnek)
 question-suggestion-merge  Ötletek összevonása
-question-suggestion-support  Ötlet “szavazásra, vitára javaslom” bejelölése, illetve ennek visszavonása
+question-suggestion-support  Ötlet “szavazásra, javaslom” bejelölése, illetve ennek visszavonása
 question-edit  Alternatíva módosítása (ha ez a lehetőség adott akkor adminok minden alternativát, mások csak a saját maguk által feltöltöttet módosíthatnak)
 question-delete  Alternatíva törlése (ha ez a lehetőség adott akkor adminok minden suggestiont, mások csak a saját maguk által feltöltöttet törölhetnek)
 question-merge  Két alternatíva összevonása
+question-vote-support Szavazás megnyitásának támogatása
 
 option-suggestion-edit  Ötlet modosítása (ha ez a lehetőség adott akkor adminok minden suggestiont, mások csak a saját maguk által feltöltöttet módosíthatnak)
 option-suggestion-delete  Ötlet törlése (ha ez a lehetőség adott akkor adminok minden suggestiont, mások csak a saját maguk által feltöltöttet törölhetnek)
@@ -204,6 +206,7 @@ option-suggestion-support  Ötlet “szavazásra, vitára javaslom” bejelölé
 option-edit  Alternatíva módosítása (ha ez a lehetőség adott akkor adminok minden alternativát, mások csak a saját maguk által feltöltöttet módosíthatnak)
 option-delete  Alternatíva törlése (ha ez a lehetőség adott akkor adminok minden suggestiont, mások csak a saját maguk által feltöltöttet törölhetnek)
 option-merge  Két alternatíva összevonása
+option-support Vita megnyitás támogatása
 
 member-suggestion-edit
 member-suggestion-delete
@@ -236,3 +239,120 @@ oncron
 </code></pre>
 </div>
 </div>
+
+<div style="display:none">
+  <div id="step0" >
+    <li style="border-style:solid; border-width:1px; margin:1px; cursor:n-resize; list-style:none">
+	  Step title:<input type="text" style="width:500px" value="step" onchange="JSONEditor.scrToTXT()" />
+	  <button class="btnDelStep" type="button" title="delete step" style="float:right"><i class="icon-delete"></i>Delete step</button>
+	  <ul>
+	  </ul>
+      <button class="btnAddGroup" type="button" title="add group"><i class="icon-plus"></i>Add group</button>
+	</li>		  
+  </div>
+  
+  <div id="group0" >
+    <li style="list-sryle:none; border-style:solid; border-width:1px; margin:1px;">
+			  User group:
+			  <select size="1">
+                <option value="guest">látogató, nincs bejelentkezve</option>
+                <option value="registered">ADA -val be van jelentkezve, de semmilyen tanúsítványa nincs,</option>
+                <option value="ada-email">email ellenőrzött ADA bejelentkezés. </option>
+                <option value="ada-magyar">Magyar tanusítvánnyal rendelkező ADA bejelntkezés. </option>
+                <option value="ada-oevk">Magyar tanusítvánnyal és egy oevk tanusítvánnyal rendelkező ADA bejelentkezés </option>
+                <option value="ada-vm"> Magyar, oevk és választói mozgalom tanusítvánnyal rendelkező ADA bejelentkezés. </option>
+                <option value="category-creator">az aktuális category létrehozója</option>
+                <option value="question-creator">az aktuális szavazás létrehozója</option>
+                <option value="option-creator">az aktuális opció létrehozója</option>
+                <option value="category-candidates">tagságra jelentkezett</option>
+                <option value="category-member">az aktuális kategória tagja</option>
+                <option value="category-admin">az aktuális kategória adminisztrátora</option>
+                <option value="category-acredited">képviselő</option>
+                <option value="admin">adminisztrátor. </option>
+			  </select>
+			  <button class="btnEditActions" type="button" title="edit actions"><i class="icon-edit"></i>Edit actions</button>
+			  <button class="btnDelGroup" type="button" title="delete group" style="float:right"><i class="icon-delete"></i>Delete group</button>
+			  <br />
+			  <span> </span>
+	</li>		  
+  </div>
+</div>
+
+<div id="actionsPopup" style="display:none; position:fixed; left:50px; top:100px; z-index:99; background-color:#E0E0e0; padding:10px; border-style:solid; border-width:1px; width:auto">
+<p style="text-align:right"><button type="button" onclick="jQuery('#actionsPopup').hide();" title="close"><i class="icon-delete"></i></button></p>
+<fieldset>
+<div class="akcioChk"><input type="checkbox" value="view-categories" /></div>
+<div class="akcioChk"><input type="checkbox" value="view-questions" /></div>
+<div class="akcioChk"><input type="checkbox" value="view-members" /></div>
+<div class="akcioChk"><input type="checkbox" value="view-options" /></div>
+<div class="akcioChk"><input type="checkbox" value="view-category-sugestions" /></div>
+<div class="akcioChk"><input type="checkbox" value="view-question-sugestions" /></div>
+<div class="akcioChk"><input type="checkbox" value="view-option-sugestions" /></div>
+<div class="akcioChk"><input type="checkbox" value="view-creator-nick" /></div>
+<div class="akcioChk"><input type="checkbox" value="view-creator-name" /></div>
+<div class="akcioChk"><input type="checkbox" value="view-comment" /></div>
+<div class="akcioChk"><input type="checkbox" value="view-vokscount" /></div>
+<div class="akcioChk"><input type="checkbox" value="view-result" /></div>
+<div class="akcioChk"><input type="checkbox" value="view-myvoks" /></div>
+<div class="akcioChk"><input type="checkbox" value="view-vokses" /></div>
+</fieldset>
+<fieldset>
+<div class="akcioChk"><input type="checkbox" value="add-category-suggestion" /></div>
+<div class="akcioChk"><input type="checkbox" value="add-question-suggestion" /></div>
+<div class="akcioChk"><input type="checkbox" value="add-option-suggestion" /></div>
+<div class="akcioChk"><input type="checkbox" value="add-member-suggestion" /></div>
+<div class="akcioChk"><input type="checkbox" value="add-category" /></div>
+<div class="akcioChk"><input type="checkbox" value="add-question" /></div>
+<div class="akcioChk"><input type="checkbox" value="add-option" /></div>
+<div class="akcioChk"><input type="checkbox" value="add-member" /></div>
+<div class="akcioChk"><input type="checkbox" value="add-acredited" /></div>
+</fieldset>
+<fieldset>
+<div class="akcioChk"><input type="checkbox" value="edit-category-suggestion" /></div>
+<div class="akcioChk"><input type="checkbox" value="edit-question-suggestion" /></div>
+<div class="akcioChk"><input type="checkbox" value="edit-option-suggestion" /></div>
+<div class="akcioChk"><input type="checkbox" value="edit-member-suggestion" /></div>
+<div class="akcioChk"><input type="checkbox" value="edit-category" /></div>
+<div class="akcioChk"><input type="checkbox" value="edit-question" /></div>
+<div class="akcioChk"><input type="checkbox" value="edit-option" /></div>
+<div class="akcioChk"><input type="checkbox" value="edit-member" /></div>
+<div class="akcioChk"><input type="checkbox" value="edit-acredited" /></div>
+</fieldset>
+<fieldset>
+<div class="akcioChk"><input type="checkbox" value="delete-category-suggestion" /></div>
+<div class="akcioChk"><input type="checkbox" value="delete-question-suggestion" /></div>
+<div class="akcioChk"><input type="checkbox" value="delete-option-suggestion" /></div>
+<div class="akcioChk"><input type="checkbox" value="delete-member-suggestion" /></div>
+<div class="akcioChk"><input type="checkbox" value="delete-category" /></div>
+<div class="akcioChk"><input type="checkbox" value="delete-question" /></div>
+<div class="akcioChk"><input type="checkbox" value="delete-option" /></div>
+<div class="akcioChk"><input type="checkbox" value="delete-member" /></div>
+<div class="akcioChk"><input type="checkbox" value="delete-acredited" /></div>
+</fieldset>
+<fieldset>
+<div class="akcioChk"><input type="checkbox" value="support-category-suggestion" /></div>
+<div class="akcioChk"><input type="checkbox" value="support-question-suggestion" /></div>
+<div class="akcioChk"><input type="checkbox" value="support-option-suggestion" /></div>
+<div class="akcioChk"><input type="checkbox" value="support-member-suggestion" /></div>
+<div class="akcioChk"><input type="checkbox" value="support-vote-start" /></div>
+</fieldset>
+<fieldset>
+<div class="akcioChk"><input type="checkbox" value="merge-category-suggestion" /></div>
+<div class="akcioChk"><input type="checkbox" value="merge-question-suggestion" /></div>
+<div class="akcioChk"><input type="checkbox" value="merge-option-suggestion" /></div>
+<div class="akcioChk"><input type="checkbox" value="merge-category" /></div>
+<div class="akcioChk"><input type="checkbox" value="merge-question" /></div>
+<div class="akcioChk"><input type="checkbox" value="merge-option" /></div>
+</fieldset>
+<fieldset>
+<div class="akcioChk"><input type="checkbox" value="comment-add" /></div>
+<div class="akcioChk"><input type="checkbox" value="comment-edit" /></div>
+<div class="akcioChk"><input type="checkbox" value="comment-delete" /></div>
+<div class="akcioChk"><input type="checkbox" value="voks-add" /></div>
+<div class="akcioChk"><input type="checkbox" value="voks-delete" /></div>
+<div class="akcioChk"><input type="checkbox" value="set-step" /></div>
+</fieldset>
+<br />
+<center><button type="button" id="actionsPopupOK"><i class="icon-ok"></i>Rendben</button></center>
+</div>
+
