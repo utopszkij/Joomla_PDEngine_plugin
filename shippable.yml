@@ -5,7 +5,7 @@ language: php
 # php tag
 php: 5.6
 #Test scripts
-script: phpunit UnitTest/site
-script: phpunit UnitTest/admin
+script: phpunit UnitTest/site;
+phpunit UnitTest/admin
 
 
