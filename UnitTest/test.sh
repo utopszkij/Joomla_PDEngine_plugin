@@ -1,2 +1,0 @@
-phpunit site
-phpunit admin
