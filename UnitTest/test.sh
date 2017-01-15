@@ -1,2 +1,2 @@
-unittest site
-unittest admin
+phpunit site
+phpunit admin
