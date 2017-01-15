@@ -179,7 +179,7 @@ class PvoksController extends JControllerLegacy {
 		if ($msg != '')
 			echo '<div class="'.$msgClass.'">'.$msg.'</div>';
 		if (file_exists(JPATH_COMPONENT.'/models/forms/'.$this->formName.'.xml'))	
-			$form = &JForm::getInstance('adminForm',            
+			$form = JForm::getInstance('adminForm',            
                              JPATH_COMPONENT.'/models/forms/'.$this->formName.'.xml',
                              array('control' => 'jform')); 
 		if (file_exists(JPATH_COMPONENT.'/views/'.$this->viewName.'/tmpl/form.js'))	{
@@ -196,8 +196,10 @@ class PvoksController extends JControllerLegacy {
 		   $item = $model->getItem(0);
 	    else {
 		  $item = new stdClass();	
-		  foreach ($jform as $fn => $fv)
-		    $item->$fn = $fv;
+		  if (is_array($jform)) {
+		    foreach ($jform as $fn => $fv)
+		       $item->$fn = $fv;
+		  }	
 		}
 		$form->bind($item);
 		$view = $this->getView($this->viewName, 'html');
@@ -231,7 +233,7 @@ class PvoksController extends JControllerLegacy {
 		$ids = array();
 		
 		if (file_exists(JPATH_COMPONENT.'/models/forms/'.$this->formName.'.xml'))	
-			$form = &JForm::getInstance('adminForm',            
+			$form = JForm::getInstance('adminForm',            
                              JPATH_COMPONENT.'/models/forms/'.$this->formName.'.xml',
                              array('control' => 'jform')); 
 		if (file_exists(JPATH_COMPONENT.'/views/'.$this->viewName.'/tmpl/form.js'))	{

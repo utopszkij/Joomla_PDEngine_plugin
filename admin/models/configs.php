@@ -9,7 +9,8 @@
  */
 
 defined("_JEXEC") or die("Restricted access");
-include_once JPATH_ADMINISTRATOR.'/components/com_pvoks/models/model.php';
+//include_once JPATH_ADMINISTRATOR.'/components/com_pvoks/models/model.php';
+include_once JPATH_COMPONENT.'/models/model.php';
 
 class PvoksModelConfigs extends PvoksModel {
 
@@ -19,6 +20,7 @@ class PvoksModelConfigs extends PvoksModel {
 		$this->viewName = 'configs';
 		$this->dbTabla = '#__pvoks_configs';
 		$this->lngPre ='PVOKS_';
+		date_default_timezone_set('Europe/Budapest');
 	}
 	
 	/**
@@ -88,7 +90,7 @@ class PvoksModelConfigs extends PvoksModel {
 	  * @return boolean  
 	  * ha nem tárolható akkor $this->setError() beállítva 
 	*/
-	public function check($item) {
+	public function check(&$item) {
 		$result = true;
 		$msg = '';
 		$db = JFactory::getDBO();

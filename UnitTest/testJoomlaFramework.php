@@ -172,7 +172,21 @@ class JDocument {
 		return 'html';
 	}
 }
+class Jobject {
+	public function get($name) {
+		return 'get_'.$name;
+	}
+	public function set($name,$value) {
+		return;
+	}
+	
+}
+
 class JInput {
+	public $post;
+	function __construct() {
+		$this->post = new Jobject();
+	}
 	public function get($name, $default='') {
 		global $testData;
 		return $testData->getInput($name, $default);
@@ -492,6 +506,9 @@ class JModelList extends JModelLegacy {
 	public function getItems() {
 		return array();
 	}
+	public static function getPagination() {
+		return new JPagination(100, 0, 20);
+	}
 }
 class JViewLegacy {
 	protected $layout;
@@ -549,6 +566,37 @@ class UsersModelGroup {
     return false;
   }
 }
+
+class JRoute {
+	public static function _($url) {
+		return $url;
+	}
+}
+class JForm {
+	public static function getInstance($nev, $path, $config) {
+		return new JForm();
+	}
+	public static function getLabel($name) {
+		return '<label>'.$name.'</label>';
+	}
+	public static function getInput($name) {
+		return '<input name="'.$name.'" />';
+	}
+	public static function getValue($name) {
+		return 'value_'.$name;
+	}
+	public static function setValue($name,$value) {
+		return;
+	}
+	public static function bind($source) {
+		return;
+	}
+	public static function setFieldAttribute($name,$attr,$value) {
+		return;
+	}
+}
+
+
 // global functions
 function jimport($str) {}
 
