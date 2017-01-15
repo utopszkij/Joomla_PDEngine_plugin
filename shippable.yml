@@ -6,5 +6,6 @@ language: php
 php: 5.6
 #Test scripts
 script: phpunit UnitTest/site
+script: phpunit UnitTest/admin
 
 
