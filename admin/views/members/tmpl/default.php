@@ -42,6 +42,7 @@ $pvoksHelper->echoControlPanel();
 		 <?php 
 		 $db->setQuery('select id,name from #__users order by name');
 		 $res = $db->loadObjectList();
+		 if (is_array($res))
 		 foreach ($res as $res1) : 
 		 ?>
 	     <option value="<?php echo $res1->id; ?>"<?php if($input->get('filter_user_id',0)==$res1->id) echo ' selected="selected"'; ?>>

@@ -9,7 +9,7 @@
  */
 
 defined("_JEXEC") or die("Restricted access");
-include_once JPATH_ADMINISTRATOR.'/components/com_pvoks/models/model.php';
+include_once JPATH_COMPONENT.'/models/model.php';
 
 class PvoksModelAcrediteds extends PvoksModel {
 

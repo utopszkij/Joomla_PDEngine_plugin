@@ -9,6 +9,7 @@ define('JPATH_BASE', 'adalogin');
 define('JPATH_ROOT', 'adalogin');
 define('JPATH_ADMINISTRATOR', 'adalogin/admin');
 define('_UNITTEST', '1');
+date_default_timezone_set('UTC');
 
 class testDataClass {
 
@@ -239,7 +240,10 @@ class JDatabase {
 	}
 	public function loadObjectList() {
 		global $testData;
-		return $testData->getDbResult();	
+		$result = $testData->getDbResult();	
+		if (!is_array($result)) 
+			$result = array();
+		return $result;
 	}
 	public function loadObject() {
 		return $this->loadObjectList();
@@ -369,6 +373,12 @@ class JTable {
 	}
 	public function getError() {
 		
+	}
+	public static function getInstance() {
+		return new JTable();
+	}
+	public static function store() {
+		return true;
 	}
 }
 class JControllerLegacy {
@@ -599,6 +609,15 @@ class JForm {
 
 // global functions
 function jimport($str) {}
+
+if (!function_exists('mb_stripos')) {
+  function mb_stripos($miben,$mit,$offset=0,$kod='utf-8') {
+	return 1;
+  }
+  function mb_substr($miben,$start,$length) {
+	return $miben;
+  }
+}
 
 // init globals
 $_SERVER['HTTP_SITE'] = 'localhost';

@@ -3,9 +3,9 @@ define('JPATH_COMPONENT', 'admin');
 require_once "UnitTest/testJoomlaFramework.php";
 require_once "admin/controllers/controller.php";
 require_once "admin/helpers/pvoks.php";
-require_once "admin/controllers/configs.php";
+require_once "admin/controllers/options.php";
 
-class pvoksTestConfigs extends PHPUnit_Framework_TestCase {
+class pvoksTestOptions extends PHPUnit_Framework_TestCase {
 	function __construct() {
 		global $testData,$componentName,$viewName;
 		$componentName = 'pvoks';
@@ -17,34 +17,34 @@ class pvoksTestConfigs extends PHPUnit_Framework_TestCase {
 		$testData->clear();
 		$componentName = 'pvoks';
 	}
-	public function test_configs_browse()  {
+	public function test_options_browse()  {
 		global $testData;
-		$controller = new PvoksControllerConfigs();
+		$controller = new PvoksControllerOptions();
 		$controller->browse();
-		$this->expectOutputRegex('/PVOKS_CONFIGS_LIST/');
+		$this->expectOutputRegex('/PVOKS_OPTIONS_LIST/');
 		
     }
-	public function test_configs_add()  {
+	public function test_options_add()  {
 		global $testData;
-		$controller = new PvoksControllerConfigs();
+		$controller = new PvoksControllerOptions();
 		$controller->add();
-		$this->expectOutputRegex('/PVOKS_CONFIGS_ADD/');
+		$this->expectOutputRegex('/PVOKS_OPTIONS_ADD/');
     }
-	public function test_configs_edit()  {
+	public function test_options_edit()  {
 		global $testData;
-		$controller = new PvoksControllerConfigs();
+		$controller = new PvoksControllerOptions();
 		$controller->edit();
-		$this->expectOutputRegex('/PVOKS_CONFIGS_LIST/');
+		$this->expectOutputRegex('/PVOKS_OPTIONS_LIST/');
     }
-    public function test_configs_delete()  {
+    public function test_options_delete()  {
 		global $testData;
-		$controller = new PvoksControllerConfigs();
+		$controller = new PvoksControllerOptions();
 		$controller->delete();
 		$this->expectOutputRegex('/submitbutton/');
     }
-    public function test_configs_save()  {
+    public function test_options_save()  {
 		global $testData;
-		$controller = new PvoksControllerConfigs();
+		$controller = new PvoksControllerOptions();
 		$controller->save();
 		$this->expectOutputRegex('/submitbutton/');
     }

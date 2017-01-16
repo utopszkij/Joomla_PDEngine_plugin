@@ -201,6 +201,13 @@ class PvoksController extends JControllerLegacy {
 		       $item->$fn = $fv;
 		  }	
 		}
+		if (file_exists(JPATH_COMPONENT.'/models/forms/'.$this->formName.'.xml'))	
+			$form = JForm::getInstance('adminForm',            
+                             JPATH_COMPONENT.'/models/forms/'.$this->formName.'.xml',
+                             array('control' => 'jform')); 
+		else {
+			echo 'form not exists '.$this->formName; 
+		}					 
 		$form->bind($item);
 		$view = $this->getView($this->viewName, 'html');
 		$view->set('item',$item);
