@@ -11,7 +11,7 @@ class adaloginTest extends PHPUnit_Framework_TestCase {
 		$viewName = 'pvoks';
 		parent::__construct();
 	}
-    protected function setUp() {
+    protected fun   HIBA ction setUp() {
 		global $testData,$componentName;
 		$testData->clear();
 		$componentName = 'Adalogin';
