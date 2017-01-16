@@ -191,7 +191,7 @@ class PvoksController extends JControllerLegacy {
 		}
 
 		$model = $this->getModel($this->modelName);
-		$jform = $input->post->get('jform','','array');
+		$jform = $input->get('jform','','array');
 		if ($jform == '')
 		   $item = $model->getItem(0);
 	    else {

@@ -3,6 +3,7 @@
 * test framwork for joomla components unit test
 */
 error_reporting(E_ALL & ~E_NOTICE);
+date_default_timezone_set('UTC');
 define( '_JEXEC', 1 );
 define( 'DS', DIRECTORY_SEPARATOR );
 define('JPATH_BASE', 'adalogin');
@@ -28,7 +29,6 @@ class testDataClass {
 	protected $dbErrorNum;
 	protected $dbErrorMsg;
 	protected $dbIndex;
-	
 
     	public $gotArgs = array();
 	public $mock_data = array();
@@ -226,7 +226,10 @@ class JDatabase {
 	}
 	public function loadObjectList() {
 		global $testData;
-		return $testData->getDbResult();	
+		$result = $testData->getDbResult();	
+		if (!is_array($result))
+			$result = array();
+		return $result;
 	}
 	public function loadObject() {
 		return $this->loadObjectList();
@@ -357,6 +360,12 @@ class JTable {
 	public function getError() {
 		
 	}
+	public static function getInstance() {
+		return new JTable();
+	}
+	public function store() {
+		return true;
+	}
 }
 class JControllerLegacy {
 	protected $redirectURI = '';
@@ -482,7 +491,7 @@ class JModelLegacy {
 	protected function getListCount($query) {
 		return 0;
 	}
-	public static function getPagination($total=10, $limitstart=0, $limit=20) {
+	public function getPagination($total=100, $limitstart=0, $limit=20) {
 		return new JPagination($total, $limitstart, $limit);
 	}
 }
@@ -558,8 +567,42 @@ class JRoute {
 		return $url;
 	}
 }
+class JForm {
+	public function getLabel($name) {
+		return $name;
+	}
+	public function getValue($name) {
+		return $name;
+	}
+	public function getInput($name) {
+		return $name;
+	}
+	public function setFieldAttribute($name,$attr,$value) {
+		return;
+	}
+	public function setValue($name,$value) {
+		return;
+	}
+	public static function getInstance() {
+		return new JForm();
+	}
+	public function bind($surce) {
+		return;
+	}
+	
+}
+
 // global functions
 function jimport($str) {}
+
+if (!function_exists('mb_stripos')) {
+	function mb_stripos($str,$nidle) {
+		return 10;
+	}
+	function mb_substr($str,$start,$len) {
+		return $str;
+	}
+}
 
 // init globals
 $_SERVER['HTTP_SITE'] = 'localhost';
