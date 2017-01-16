@@ -1,7 +1,7 @@
 <?php
-require_once "tests/testJoomlaFramework.php";
+require_once "UnitTest/testJoomlaFramework.php";
 
-class adaloginTest extends PHPUnit_Framework_TestCase {
+class pvoksTest extends PHPUnit_Framework_TestCase {
 	public $ada;
 	
 	function __construct() {

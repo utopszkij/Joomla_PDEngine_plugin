@@ -26,3 +26,13 @@ Funkciók:
 
 
 
+Telepités
+---------
+1. clear joomla_root/tmp
+2. copy this_repo/admin subdir to joomla_root/tmp
+3. copy this_repo/siten subdir to joomla_root/tmp
+4. copy this_repo/*.xml to joomla_root/tmp
+5. use joomla admin "install compontnt from path" function
+
+
+
