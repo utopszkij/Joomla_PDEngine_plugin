@@ -9,7 +9,6 @@ define('JPATH_BASE', 'adalogin');
 define('JPATH_ROOT', 'adalogin');
 define('JPATH_ADMINISTRATOR', 'adalogin/admin');
 define('_UNITTEST', '1');
-date_default_timezone_set('UTC');
 
 class testDataClass {
 
@@ -173,21 +172,7 @@ class JDocument {
 		return 'html';
 	}
 }
-class Jobject {
-	public function get($name) {
-		return 'get_'.$name;
-	}
-	public function set($name,$value) {
-		return;
-	}
-	
-}
-
 class JInput {
-	public $post;
-	function __construct() {
-		$this->post = new Jobject();
-	}
 	public function get($name, $default='') {
 		global $testData;
 		return $testData->getInput($name, $default);
@@ -240,10 +225,7 @@ class JDatabase {
 	}
 	public function loadObjectList() {
 		global $testData;
-		$result = $testData->getDbResult();	
-		if (!is_array($result)) 
-			$result = array();
-		return $result;
+		return $testData->getDbResult();	
 	}
 	public function loadObject() {
 		return $this->loadObjectList();
@@ -373,12 +355,6 @@ class JTable {
 	}
 	public function getError() {
 		
-	}
-	public static function getInstance() {
-		return new JTable();
-	}
-	public static function store() {
-		return true;
 	}
 }
 class JControllerLegacy {
@@ -516,9 +492,6 @@ class JModelList extends JModelLegacy {
 	public function getItems() {
 		return array();
 	}
-	public static function getPagination() {
-		return new JPagination(100, 0, 20);
-	}
 }
 class JViewLegacy {
 	protected $layout;
@@ -576,48 +549,8 @@ class UsersModelGroup {
     return false;
   }
 }
-
-class JRoute {
-	public static function _($url) {
-		return $url;
-	}
-}
-class JForm {
-	public static function getInstance($nev, $path, $config) {
-		return new JForm();
-	}
-	public static function getLabel($name) {
-		return '<label>'.$name.'</label>';
-	}
-	public static function getInput($name) {
-		return '<input name="'.$name.'" />';
-	}
-	public static function getValue($name) {
-		return 'value_'.$name;
-	}
-	public static function setValue($name,$value) {
-		return;
-	}
-	public static function bind($source) {
-		return;
-	}
-	public static function setFieldAttribute($name,$attr,$value) {
-		return;
-	}
-}
-
-
 // global functions
 function jimport($str) {}
-
-if (!function_exists('mb_stripos')) {
-  function mb_stripos($miben,$mit,$offset=0,$kod='utf-8') {
-	return 1;
-  }
-  function mb_substr($miben,$start,$length) {
-	return $miben;
-  }
-}
 
 // init globals
 $_SERVER['HTTP_SITE'] = 'localhost';
