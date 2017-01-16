@@ -36,7 +36,7 @@ class pvoksTest extends PHPUnit_Framework_TestCase {
 		$controller->edit();
 		$this->expectOutputRegex('/PVOKS_CONFIGS_LIST/');
     }
-    public function test_configs_delete()  {
+    public fun HIBA ction test_configs_delete()  {
 		global $testData;
 		$controller = new PvoksControllerConfigs();
 		$controller->delete();
