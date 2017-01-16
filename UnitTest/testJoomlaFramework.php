@@ -481,6 +481,9 @@ class JModelLegacy {
 	protected function getListCount($query) {
 		return 0;
 	}
+	protected function getPagination($total=10, $limitstart=0, $limit=20) {
+		return new JPagination($total, $limitstart, $limit);
+	}
 }
 class JModelList extends JModelLegacy {	
 	public function getQuery() {
