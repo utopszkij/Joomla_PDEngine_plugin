@@ -28,6 +28,7 @@ class testDataClass {
 	protected $dbErrorNum;
 	protected $dbErrorMsg;
 	protected $dbIndex;
+	
 
     	public $gotArgs = array();
 	public $mock_data = array();
