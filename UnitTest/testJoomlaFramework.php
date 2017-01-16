@@ -553,6 +553,11 @@ class UsersModelGroup {
     return false;
   }
 }
+class JRoute {
+	public static function _($url) {
+		return $url;
+	}
+}
 // global functions
 function jimport($str) {}
 
