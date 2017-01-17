@@ -116,16 +116,14 @@ class PvoksHelper {
 		$db = JFactory::getDBO();
 		$db->setQuery('select id, title from #__pvoks_categories where parent_id = '.$db->quote($parent).' order by 2');
 		$res = $db->loadObjectList();
-		if (is_array($res)) {
-			foreach ($res as $res1) {
-				if ($res1->id == $actValue) 
-					echo '<option value="'.$res1->id.'" selected="selected">'.$s.$res1->title.'</option>
-					';
-				else
-					echo '<option value="'.$res1->id.'">'.$s.$res1->title.'</option>
-					';
-				$this->echoCategoryOptions($res1->id, $s.'-&nbsp;', $actValue);	
-			}
+		foreach ($res as $res1) {
+			if ($res1->id == $actValue) 
+				echo '<option value="'.$res1->id.'" selected="selected">'.$s.$res1->title.'</option>
+				';
+			else
+				echo '<option value="'.$res1->id.'">'.$s.$res1->title.'</option>
+				';
+			$this->echoCategoryOptions($res1->id, $s.'-&nbsp;', $actValue);	
 		}
 	}
 	

@@ -179,7 +179,7 @@ class PvoksController extends JControllerLegacy {
 		if ($msg != '')
 			echo '<div class="'.$msgClass.'">'.$msg.'</div>';
 		if (file_exists(JPATH_COMPONENT.'/models/forms/'.$this->formName.'.xml'))	
-			$form = JForm::getInstance('adminForm',            
+			$form = &JForm::getInstance('adminForm',            
                              JPATH_COMPONENT.'/models/forms/'.$this->formName.'.xml',
                              array('control' => 'jform')); 
 		if (file_exists(JPATH_COMPONENT.'/views/'.$this->viewName.'/tmpl/form.js'))	{
@@ -191,23 +191,14 @@ class PvoksController extends JControllerLegacy {
 		}
 
 		$model = $this->getModel($this->modelName);
-		$jform = $input->get('jform','','array');
+		$jform = $input->post->get('jform','','array');
 		if ($jform == '')
 		   $item = $model->getItem(0);
 	    else {
 		  $item = new stdClass();	
-		  if (is_array($jform)) {
-		    foreach ($jform as $fn => $fv)
-		       $item->$fn = $fv;
-		  }	
+		  foreach ($jform as $fn => $fv)
+		    $item->$fn = $fv;
 		}
-		if (file_exists(JPATH_COMPONENT.'/models/forms/'.$this->formName.'.xml'))	
-			$form = JForm::getInstance('adminForm',            
-                             JPATH_COMPONENT.'/models/forms/'.$this->formName.'.xml',
-                             array('control' => 'jform')); 
-		else {
-			echo 'form not exists '.$this->formName; 
-		}					 
 		$form->bind($item);
 		$view = $this->getView($this->viewName, 'html');
 		$view->set('item',$item);
@@ -240,7 +231,7 @@ class PvoksController extends JControllerLegacy {
 		$ids = array();
 		
 		if (file_exists(JPATH_COMPONENT.'/models/forms/'.$this->formName.'.xml'))	
-			$form = JForm::getInstance('adminForm',            
+			$form = &JForm::getInstance('adminForm',            
                              JPATH_COMPONENT.'/models/forms/'.$this->formName.'.xml',
                              array('control' => 'jform')); 
 		if (file_exists(JPATH_COMPONENT.'/views/'.$this->viewName.'/tmpl/form.js'))	{

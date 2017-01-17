@@ -7,6 +7,10 @@ JHtml::_('behavior.tooltip');
 
 <style type="text/css">
 .akcioChk {display:inline-block; width:250px;}
+.step {border-style:solid; border-width:1px; margin:1px 3px 1px 1px; cursor:n-resize; list-style:none}
+.group {list-sryle:none; border-style:solid; border-width:1px; margin:1px 3px 1px 1px; list-style:none}
+.actionPopup {display:none; position:fixed; left:50px; top:100px; z-index:99; background-color:#E0E0e0; 
+              padding:10px; border-style:solid; border-width:1px; width:auto}
 fieldset {display:inline-block; width:260px; margin-top:10px;}
 </style>
 
@@ -49,6 +53,17 @@ fieldset {display:inline-block; width:260px; margin-top:10px;}
 
 				
 				<div id="questionConfig">
+				  <p>Extra language file:
+				  <select id="extraLngFile">
+				    <option value="">Nincs</option>
+				    <option value="oevk">oevk</option>
+				  </select>
+				  Plugin:
+				  <select id="plugin">
+				    <option value="">Nincs</option>
+				    <option value="debian">debian</option>
+				  </select>
+				  </p>
 				  <ul id="ulSteps">
 				  </ul>
 				  <button type="button" id="addStep" title="add step"><i class="icon-plus"></i>Add step</button>&nbsp;
@@ -242,7 +257,7 @@ oncron
 
 <div style="display:none">
   <div id="step0" >
-    <li style="border-style:solid; border-width:1px; margin:1px; cursor:n-resize; list-style:none">
+    <li class="step">
 	  Step title:<input type="text" style="width:500px" value="step" onchange="JSONEditor.scrToTXT()" />
 	  <button class="btnDelStep" type="button" title="delete step" style="float:right"><i class="icon-delete"></i>Delete step</button>
 	  <ul>
@@ -252,11 +267,11 @@ oncron
   </div>
   
   <div id="group0" >
-    <li style="list-sryle:none; border-style:solid; border-width:1px; margin:1px;">
+    <li class="group">
 			  User group:
 			  <select size="1">
                 <option value="guest">látogató, nincs bejelentkezve</option>
-                <option value="registered">ADA -val be van jelentkezve, de semmilyen tanúsítványa nincs,</option>
+                <option value="registered">Be van jelentkezve, semmijen tanusitása nincs,</option>
                 <option value="ada-email">email ellenőrzött ADA bejelentkezés. </option>
                 <option value="ada-magyar">Magyar tanusítvánnyal rendelkező ADA bejelntkezés. </option>
                 <option value="ada-oevk">Magyar tanusítvánnyal és egy oevk tanusítvánnyal rendelkező ADA bejelentkezés </option>
@@ -278,8 +293,11 @@ oncron
   </div>
 </div>
 
-<div id="actionsPopup" style="display:none; position:fixed; left:50px; top:100px; z-index:99; background-color:#E0E0e0; padding:10px; border-style:solid; border-width:1px; width:auto">
-<p style="text-align:right"><button type="button" onclick="jQuery('#actionsPopup').hide();" title="close"><i class="icon-delete"></i></button></p>
+<div id="actionsPopup" class="actionPopup">
+  <p>
+   <b id="actionsPopupTitle"></b>
+   <button style="float:right;" type="button" onclick="jQuery('#actionsPopup').hide();" title="close"><i class="icon-delete"></i></button>
+  </p> 
 <fieldset>
 <div class="akcioChk"><input type="checkbox" value="view-categories" /></div>
 <div class="akcioChk"><input type="checkbox" value="view-questions" /></div>

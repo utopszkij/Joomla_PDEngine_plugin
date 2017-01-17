@@ -54,14 +54,14 @@
 	  */
 	  groupToJSON : function(group) {
 		   var i = 0;
-		   JSONEditor.JSONstr += '\n    {"group":"';
+		   JSONEditor.JSONstr += '\n      {"group":"';
 		   group.children('select').each(function(i,sel) {
 			   JSONEditor.JSONstr += sel.options[sel.selectedIndex].value+'","actions":[';
 		   });	   
 		   group.children('span').each(function(i,actions) {
 			  JSONEditor.JSONstr += actions.innerHTML+']'; 
 		   });
-		   JSONEditor.JSONstr += '}';
+		   JSONEditor.JSONstr += '\n      }';
 		   return;
 	   },
 	  /** questionConfig screen to JSON feldolgozás into JSONstr
@@ -69,7 +69,7 @@
       */
       groupsToJSON : function(groups) {
 	    var i = 0;
-	    JSONEditor.JSONstr += '\n  "groups":[';
+	    JSONEditor.JSONstr += '\n    "groups":[';
 	    groups.children('li').each(function(i,group) {
 		    if (i == 0) {
 			  JSONEditor.groupToJSON(jQuery(group));
@@ -78,7 +78,7 @@
 			  JSONEditor.groupToJSON(jQuery(group));
 			}  
 	    });
-	    JSONEditor.JSONstr += '\n  ]';
+	    JSONEditor.JSONstr += '\n    ]';
 	    return;
       },
 	  /** questionConfig screen to JSON feldolgozás into JSONstr
@@ -87,12 +87,12 @@
 	  stepToJSON : function(step) {
 		   var i = 0;
 		   step.children('input').each(function(i,item) {
-				JSONEditor.JSONstr += '\n{"title":"'+item.value+'",';
+				JSONEditor.JSONstr += '\n  {"title":"'+item.value+'",';
 		   });
 		   step.children('ul').each(function(i,grops) {
 				JSONEditor.groupsToJSON(jQuery(grops));
 		   });
-		   JSONEditor.JSONstr += '\n}';
+		   JSONEditor.JSONstr += '\n  }';
 		   return;
 	   },
 	   /** questionConfig screen to JSON feldolgozás into JSONstr
@@ -100,7 +100,7 @@
        */
        stepsToJSON : function(steps) {
 		   var i = 0;
-		   JSONEditor.JSONstr = '{"steps":[';
+		   JSONEditor.JSONstr = '"steps":[';
 		   steps.children('li').each(function(i,step) {
 			   if (i == 0) {
 				   JSONEditor.stepToJSON(jQuery(step));
@@ -109,7 +109,7 @@
 				   JSONEditor.stepToJSON(jQuery(step));
 			   }
 		   });
-		   return JSONEditor.JSONstr+'\n]}';
+		   return JSONEditor.JSONstr+'\n]';
        },
 	   /**
 	   * init jquestion config scr step from array
@@ -148,7 +148,9 @@
 		* a config képernyöről áttölt a textare -back
 		*/
 		scrToTXT : function() {
-				var s = JSONEditor.stepsToJSON(jQuery('#ulSteps'));
+				var s = '{"extraLngFile":"'+jQuery('#extraLngFile').val()+'"';
+				s += ',\n"plugin":"'+jQuery('#plugin').val()+'",\n';
+				s += JSONEditor.stepsToJSON(jQuery('#ulSteps'))+'\n}';
 				jQuery('#jform_json').val(s);
 		},
 		/**
@@ -164,7 +166,9 @@
 					jQuery('.btnEditActions').click(function(event) {
 						JSONEditor.actionSpan = jQuery(event.target).parent().children('span');
 						// init actionsPopup scr
-						jQuery('#actionsPopup').children('input').each(function (i,item) {
+						jQuery('#actionsPopupTitle').html(gr.children('select').val() + ' / '+
+							gr.parent().parent().children('input').val());
+						jQuery('#actionsPopup').find('input').each(function (i,item) {
 							item.checked = (JSONEditor.actionSpan.html().indexOf('"'+item.value+'"') >= 0); 
 						});
 						jQuery('#actionsPopup').show();
@@ -181,8 +185,11 @@
 			});
 			jQuery('.btnEditActions').click(function(event) {
 				JSONEditor.actionSpan = jQuery(event.target).parent().children('span');
+				var gr = jQuery(event.target).parent();
 				// init actionsPopup scr
-				jQuery('#actionsPopup').children('input').each(function (i,item) {
+				jQuery('#actionsPopupTitle').html(gr.children('select').val() + ' / '+
+				   gr.parent().parent().children('input').val());
+				jQuery('#actionsPopup').find('input').each(function (i,item) {
 					item.checked = (JSONEditor.actionSpan.html().indexOf('"'+item.value+'"') >= 0); 
 				});
 				jQuery('#actionsPopup').show();
@@ -225,6 +232,14 @@
 				var s = JSONEditor.stepsToJSON(jQuery('#ulSteps'));
 				jQuery('#jform_json').val(s);
 			});
+			
+			jQuery('#extraLngFile').change(function(event) {
+				JSONEditor.scrToTXT();
+			});
+
+			jQuery('#plugin').change(function(event) {
+				JSONEditor.scrToTXT();
+			});
 
 			/**
 			* jquestionConfig scr addstep button function
@@ -249,6 +264,8 @@
 						JSONEditor.initStep(w, init.steps[i]);
 					}
 				}
+				jQuery('#extraLngFile').val(init.extraLngFile);
+				jQuery('#plugin').val(init.plugin);
 				JSONEditor.redefButtons();
 				JSONEditor.scrToTXT();
 			}

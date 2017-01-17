@@ -174,7 +174,7 @@ class JDocument {
 	}
 }
 class JInput {
-	public function get($name, $default='') {
+	public function get($name, $default='', $dataType='string') {
 		global $testData;
 		return $testData->getInput($name, $default);
 	}
@@ -232,7 +232,8 @@ class JDatabase {
 		return $result;
 	}
 	public function loadObject() {
-		return $this->loadObjectList();
+		global $testData;
+		return $testData->getDbResult();
 	}
 	public function query() {
 		return true;
@@ -248,6 +249,9 @@ class JDatabase {
 			return $str;
 		else
 			return '"'.$str.'"';
+	}
+	public static function insertid() {
+		return 10;
 	}
 }
 
@@ -503,7 +507,7 @@ class JModelList extends JModelLegacy {
 		return 0;	
 	}
 	public function getItems() {
-		return array();
+		return $this->_db->loadObjectList();
 	}
 }
 class JViewLegacy {
@@ -528,6 +532,9 @@ class JViewLegacy {
 	}
 	public function setModel($model) {
 		$this->model = $model;
+	}
+	public function escape($s) {
+		return $s;
 	}
 }
 
