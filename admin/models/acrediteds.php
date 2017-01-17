@@ -9,7 +9,7 @@
  */
 
 defined("_JEXEC") or die("Restricted access");
-include_once JPATH_ADMINISTRATOR.'/components/com_pvoks/models/model.php';
+include_once JPATH_COMPONENT.'/models/model.php';
 
 class PvoksModelAcrediteds extends PvoksModel {
 
@@ -79,7 +79,7 @@ class PvoksModelAcrediteds extends PvoksModel {
 	  * @return boolean  
 	  * ha nem tárolható akkor $this->setError() beállítva 
 	*/
-	public function check($item) {
+	public function check(&$item) {
 		$result = true;
 		$msg = '';
 		$db = JFactory::getDBO();
