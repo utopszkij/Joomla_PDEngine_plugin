@@ -149,7 +149,8 @@ class PvoksModelQuestions extends PvoksModel {
 		  $result->category = $db->loadObject();
 		  $db->setQuery('select * from #__pvoks_configs where id = '.$db->quote($result->question_type));
 		  $result->qtype = $db->loadObject();
-		  $result->qtype->json = JSON_decode($result->qtype->json);
+		  if ($result->qtype->json != '')
+		    $result->qtype->json = JSON_decode($result->qtype->json);
 		} else {
 		  // új rekord inicializálás felvitelhez
 		  $user = JFactory::getUser();

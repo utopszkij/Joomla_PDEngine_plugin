@@ -131,7 +131,10 @@ $pvoksHelper = new PvoksHelper();
 					</div>
 					<div style="float:left; display:block; width:auto; max-width:400px;">	
 						<ul class="steps" style="margin-top:3px;">
-						<?php foreach ($this->item->qtype->json->steps as $i => $step) : ?>
+						<?php 
+						  if (is_object($this->item->qtype->json->steps))
+						  foreach ($this->item->qtype->json->steps as $i => $step) : 
+						?>
 						  <li><?php echo (1+$i).' '.$step->title; ?></li>
 						<?php endforeach; ?>
 						</ul>

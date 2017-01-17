@@ -9,7 +9,7 @@
  */
 
 defined("_JEXEC") or die("Restricted access");
-include_once JPATH_COMPONENTS.'/models/model.php';
+include_once JPATH_COMPONENT.'/models/model.php';
 
 class PvoksModelVoters extends PvoksModel {
 
