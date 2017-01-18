@@ -9,6 +9,28 @@
 	<license>GNU/GPL</license>
 	<version>1.00</version>
 	<description>voks by borda system. Condorcet processing, liqued democracy</description>
+
+	<install> <!-- Runs on install -->
+		<sql>
+			<file driver="mysql" charset="utf8">sql/install/mysql/install.sql</file>
+			<file driver="mysqli" charset="utf8">sql/install/mysql/install.sql</file>
+		</sql>
+	</install>
+
+	<uninstall> <!-- Runs on uninstall -->
+		<sql>
+			<file driver="mysql" charset="utf8">sql/uninstall/mysql/uninstall.sql</file>
+			<file driver="mysqli" charset="utf8">sql/uninstall/mysql/uninstall.sql</file>
+		</sql>
+	</uninstall>
+
+	<update> <!-- Runs on uninstall -->
+		<sql>
+			<file driver="mysql" charset="utf8">sql/uninstall/mysql/update.sql</file>
+			<file driver="mysqli" charset="utf8">sql/uninstall/mysql/update.sql</file>
+		</sql>
+	</update>
+
 	<files folder="site">
 			<filename>pvoks.php</filename>
 			<filename>condorcet.php</filename>
@@ -17,6 +39,7 @@
 			<folder>controllers</folder>
 			<folder>models</folder>
 			<folder>tables</folder>
+			<folder>helpers</folder>
 			<folder>views</folder>
 			<folder>assets</folder>			
 	</files>	
@@ -29,6 +52,7 @@
 			<filename>pvoks.php</filename>
 			<filename>index.html</filename>			
 			<folder>controllers</folder>
+			<folder>helpers</folder>
 			<folder>models</folder>
 			<folder>tables</folder>
 			<folder>views</folder>
