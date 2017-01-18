@@ -24,7 +24,7 @@
 		<language tag="hu-HU">language/hu-HU.com_pvoks.ini</language>
 	</languages>
 	<administration>
-		<menu link="index.php?option=com_pvoks">Pvoks</menu>
+		<menu link="index.php?option=com_pvoks">Pvoks Preferenciális szavazás - likvid demokrácia</menu>
 		<files folder="admin">
 			<filename>pvoks.php</filename>
 			<filename>index.html</filename>			

@@ -1,6 +1,6 @@
 <?php
 /**
-  * com_pvoks
+  * com_pvoks component
   * Licence: GNU/GPL
   * Author: Fogler Tibor   
   * Author-email: tibor.fogler@gmail.com

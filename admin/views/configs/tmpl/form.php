@@ -305,7 +305,9 @@ oncron
 <div class="akcioChk"><input type="checkbox" value="view-options" /></div>
 <div class="akcioChk"><input type="checkbox" value="view-category-sugestions" /></div>
 <div class="akcioChk"><input type="checkbox" value="view-question-sugestions" /></div>
+<div class="akcioChk"><input type="checkbox" value="view-member-sugestions" /></div>
 <div class="akcioChk"><input type="checkbox" value="view-option-sugestions" /></div>
+
 <div class="akcioChk"><input type="checkbox" value="view-creator-nick" /></div>
 <div class="akcioChk"><input type="checkbox" value="view-creator-name" /></div>
 <div class="akcioChk"><input type="checkbox" value="view-comment" /></div>

@@ -10,6 +10,7 @@
 
 defined("_JEXEC") or die("Restricted access");
 include_once JPATH_COMPONENT.'/models/model.php';
+include_once JPATH_COMPONENT.'/models/pvoks_server.php';
 
 class PvoksModelOptions extends PvoksModel {
 
@@ -184,7 +185,19 @@ class PvoksModelOptions extends PvoksModel {
 		  $item->modified_by = $user->id;
 		  $item->modified = date('Y-m-d H:i:s');
 		}
-		return parent::save($item);
+		$result = parent::save($item);
+		
+		$pvoksServer = new PVoksServer();
+		$result = parent::save($item);
+		if (($pvoksServer->local == false) & ($result == true)) {
+			$db->setQuery('select * from #__pvoks_questions where id = '.$db->quote($item-yquestion_id));
+			$question = $db->loadObject();
+			$db->setQuery('select * from #__pvoks_options where question_id = '.$db->quote($item->question_id));
+			$options = $db->loadObjectList();
+			$result = $pvoksServer->saveQuestion($item, $options);
+		}
+	
+		return $result;
 	}
 	
 	/**
@@ -213,6 +226,14 @@ class PvoksModelOptions extends PvoksModel {
 					$this->setError($msg.'<br />'.$db->getErrorMsg());
 			  }
 		}	
+		
+		$pvoksServer = new PVoksServer();
+		if (($pvoksServer->local == false) & ($result == true)) {
+			$db->setQuery('select * from #__pvoks_questions where id = '.$db->quote($item-yquestion_id));
+			$question = $db->loadObject();
+			$result = $pvoksServer->deleteQuestion($question);
+		}
+		
 		return $result;
 	}
 }

@@ -35,4 +35,9 @@ Telepités
 5. use joomla admin "install compontnt from path" function
 
 
+Kapcsolodó linkek:
 
+ADA interface dokumentáció (adatom.hu/ada/v1/... hivások)
+http://adadocs.demokracia.rulez.org/html/documentation.html
+Példa: statisztika lekérés:
+https://adatom.hu/ada/v1/statistics

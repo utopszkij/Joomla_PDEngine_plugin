@@ -165,6 +165,7 @@
 					});
 					jQuery('.btnEditActions').click(function(event) {
 						JSONEditor.actionSpan = jQuery(event.target).parent().children('span');
+						var gr = jQuery(event.target).parent();
 						// init actionsPopup scr
 						jQuery('#actionsPopupTitle').html(gr.children('select').val() + ' / '+
 							gr.parent().parent().children('input').val());
