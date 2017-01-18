@@ -5,7 +5,7 @@
 */
 class PVoksServer {
 	
-	protected $local = true;
+	public $local = true;
 	protected $server_URL = '';
 	protected $appKey = '';
 		

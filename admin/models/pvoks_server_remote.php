@@ -5,7 +5,7 @@
 */
 class PVOKS_SERVER {
 	
-	protected $local = false;
+	public $local = false;
 	protected $server_URL = '';
 	protected $appKey = '';
 		
