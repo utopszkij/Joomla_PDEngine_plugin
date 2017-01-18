@@ -10,7 +10,7 @@ class pvoksTestOptions extends PHPUnit_Framework_TestCase {
 	function __construct() {
 		global $testData,$componentName,$viewName;
 		$componentName = 'pvoks';
-		$viewName = 'pvoks';
+		$viewName = 'options';
 		parent::__construct();
 		$this->controller = new PvoksControllerOptions();
 	}
@@ -80,6 +80,9 @@ class pvoksTestOptions extends PHPUnit_Framework_TestCase {
 		$this->expectOutputRegex('/REQUED/');
 	}	
     public function test_options_save1()  {
+		
+		echo '-------------test_option_save1 ----------------';
+		
 		global $testData;
 		// új felvitel , de az alias már létezik az adatbázisban
 		$testData->clear();

@@ -7,7 +7,7 @@
   * Author-web: github.com/utopszkij
   * Verzió: V1.00 
  */
-
+ 
 defined("_JEXEC") or die("Restricted access");
 require_once JPATH_COMPONENT.DS.'models'.DS.'model.php';
 

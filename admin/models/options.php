@@ -188,7 +188,6 @@ class PvoksModelOptions extends PvoksModel {
 		$result = parent::save($item);
 		
 		$pvoksServer = new PVoksServer();
-		$result = parent::save($item);
 		if (($pvoksServer->local == false) & ($result == true)) {
 			$db->setQuery('select * from #__pvoks_questions where id = '.$db->quote($item-yquestion_id));
 			$question = $db->loadObject();
