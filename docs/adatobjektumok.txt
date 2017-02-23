@@ -1,0 +1,490 @@
+Likvid demokrácia szoftver adat objektumai
+==========================================
+
+model extend frameWorkInterface
+-------------------------------
+  bool = load(id)
+  bool = store()
+  array of Record = getItems(filter, limit=0, limitstart=0)
+  array = getIds(filter)
+  bool = remove()
+  int = getCount(filter)
+  bool check()
+  bool canDelete()
+
+			
+Category extends model
+----------------------
+  int id,
+  int parent_id,
+  string title,
+  text description,
+  int ordering,
+  CategoryState state,
+  set_of_Rank ranks
+  set_of_Event events
+  RecordSet of Category subCategories,
+  RecordSet of Endorse,
+  RecordSet of Member members,
+  RecordSet of Vote,
+  RecorsSet of Delegated delegateds,           felsõbb szintre delegáltak (szavazat áruházások)
+  RecordSet of Comment comments,
+  
+  ConfigSubCategory configSubCategory,   
+  ConfigMember configMember,
+  ConfigVote configVote,
+  ConfigDelegates configDelegated,
+  ConfigComment configComment,
+  RecordSet of Log logs,  
+  
+  
+  
+Endorse
+-------
+
+Member
+------
+
+Delegated
+---------
+
+Vote
+----
+
+Comment
+-------
+
+Rank
+----
+  str title
+  text description
+  bool inMember
+  bool inSubMmber
+  set  inGroups
+
+ConfigSubCategory
+-----------------
+Groups canView
+Groups canEdit
+set events   add|close|deleteäarchive|
+             proposeAdd|endorseAdd|
+			 proposeClose|endorseClose|
+			 proposeArchive|endorseArchive|
+			 proposeDelete|endorseDelete
+set states   proposed|active|closed			 
+array_of_ConfigState configStates key:state
+
+configState
+-----------
+str beforePlugin
+str afterPlugin
+array_of_ConfigEvent configEvents key:event
+
+
+ConfigEvent
+-----------
+str beforePlugin
+str afterPlugin
+set ranks 
+
+
+
+ConfigMember
+------------
+Groups canView
+Groups canEdit
+Groups canCandidate
+Groups canInvite
+
+Groups canAdd
+Groups canProposeLogin
+Groups canEndorseLogin
+Expression loginCondition
+
+Groups canLogout
+Groups canProposeLogout
+Groups canEndorseLogout
+Expression logoutCondition
+
+Groups exclude
+Groups canProposeExlude
+Groups canEndorseExlude
+Expression excludeCondition
+
+Groups canAddRank
+Groups canPropseAddRank
+Groups canEndorseAddRank
+Expression addRankCondition
+
+Groups canRemoveRank
+Groups canPropseRemoveRank
+Groups canEndorseRemoveRank
+Expression removeRankCondition
+
+str afterCandidate
+str afterProposeAddRank
+str afterProposeRemoveRank
+str afterProposeStart
+
+str afterEndorseLogin
+str afterEndorseAddRank
+str afterEndorseRemoveRank
+str afterEndorseLogout
+str afterEndorseExluse
+str beforeLogin
+str afterLogin
+str beforeLogout
+str afterLogot
+str beforeAddRank
+str afterAddRank
+str beforeRemoveRank
+str afterRemoveRank
+
+
+ConfigVote
+----------
+Groups canView
+Groups canEdit
+
+Groups canAdd
+Groups canProposeStartDisqusion
+Groups canEndorseStartDisqusion
+Expression strtDisqusionCondition
+
+Groups canCloseDisqusion
+Groups canProposeCloseDisqusion
+Groups canEndorseCloseDisqusion
+Expression closeDisqusionCondition
+
+Groups canStartVote
+Groups canProposeStartVote
+Groups canEndorseStartVote
+Expression startVoteCondition
+
+Groups canAbort
+Groups canProposeAbort
+Groups canEndorseAbort
+Expression abortCondition
+
+Groups canArchive
+Groups canProposeArchive
+Groups canEndorseArchive
+Expression archiveCondition
+
+Groups canDelete
+Groups canProposeDelete
+Groups canEndorseDelete
+Expression deleteCondition
+
+str afterEndorseStartDisqusion
+str afterEndorseCloseDisqusion
+str afterEndorseStartVote
+str afterEndorseAbort
+str afterEndorseArchive
+str afterEndorseDelete
+
+str beforeStartDisqusion
+str beforeCloseDisqusion
+str beforeStartVote
+str beforeAbort
+str beforeArchive
+str beforeDelete
+
+str afterProposeStartDisqusion
+str afterStartDisqusion
+str afterCloseDisqusion
+str afterStartVote
+str afterCloseVote
+str afterAbort
+str afterArchive
+str afterDelete
+
+
+
+ConfigComment
+-------------
+
+ConfigDelegated
+---------------
+mnemonic mode (continueVote|periodic)
+int      period (nap)
+int      count (hány fõt delegál a csoport)
+
+
+Groups
+------
+set  members,submembers,rankName....,creator
+
+Expression
+----------
+#### | votersCount()*#.## | sqrt(votersCount()) / 2 | membersCount()*#.## | sqrt(membersCount()) / 2
+
+
+  
+  
+  
+Member extends model
+--------------------
+  int id,
+  int temakor_id,
+  User user,
+  MemberState memberState,
+  RecordSet of Suggestion suggestions,
+  RecordSet of Comment comments,
+  RecordSet of Log logs,  
+  User creator,
+  date created
+  
+Suggestion extends model
+------------------------
+  int id,
+  string objectType,
+  int object_id,
+  ActionType action,    
+  User user,
+  date created
+  
+Question extends model
+----------------------
+  int id,
+  string questionKey,  (IDE_id.IDE_adminkey)
+  int category_id,
+  string title,
+  text description,
+  Config config,
+  questIonState state,        
+  RecordSet of User voters,        szavazásra jogosultak
+  RecordSet of User voted,         szavaztak
+  RecordSet of Voks vokses,        leadott szavazatok
+  RecordSet of Suggestion          suggestions,
+  RecordSet of Option options,
+  RecordSet of Comment comments,
+  RecordSet of Log logs 
+  Condorcet condorcet,  
+  User creator,
+  date 
+  bool = userVoksed($user)
+  bool = userCanVoks($user)
+  
+  
+Config extends model
+--------------------
+  int id,
+  string objectType,
+  int object_id,
+  User creator,
+  date created
+  
+  if objectType == 'category'
+     Ranks ranks                  
+     AccesRight canView,          
+	 AccesRight canViewMembers,   
+	 
+     AccesRight canAddMember,     
+	 AccesRight canAddRank,       
+     AccesRight memberActivation, 
+     AccesRight rankActivation,   
+     AccesRight memberExclusion,  
+     AccesRight rankClose, 
+	 
+	 bool enableAcredited,
+	 
+	 bool continueDelegateVoks  - folyamatos szimpátia szavazás
+	 int delegateNumber         - a folyamatos szimpátia szavazás elsõ "x" tagja a delegált
+	 TimerSquence delegateProcessing  - a delegálás kiértékelés gyakorisága
+
+
+	 AccesRight canCreateSubcategory,  - list of userGroups or assuraces                                
+	 AccesRight canSupportSubcategory, - list of userGroups or assuraces                                
+	 AccesRight canSupportSubcategoryClose, - list of userGroups or assuraces                                
+	 AccesRight canDeleteSubcategory,  - list of userGroups or assuraces                                
+	 AccesRight canEditSubcategory,    - list of userGroups or assuraces                                
+	 Policy subCategoryActivation  - created | request_suggestion_number | request_suggestion_expression | ranks
+     Policy subCategoryClose  - request_suggestion_number | request_suggestion_expression | ranks 
+          
+     AccesRight canCreateQuestion,  - list of userGroups or assuraces                                   
+     AccesRight canSupportQuestion, - list of userGroups or assuraces                                   
+     AccesRight canSupportQuestionAbort, - list of userGroups or assuraces                                   
+     AccesRight canDeleteQuestion,  - list of userGroups or assuraces                                   
+     AccesRight canEditQuestion,    - list of userGroups or assuraces                                   
+     Policy questionActivation  - created | request_suggestion_number | request_suggestion_expression | ranks
+     Policy questionAbort       - request_suggestion_number | request_suggestion_expression | ranks
+          
+     AccesRight canCreateProject,  - list of userGroups or assuraces                                   
+     AccesRight canSupportProject, - list of userGroups or assuraces                                   
+     AccesRight canSupportProjectClose, - list of userGroups or assuraces                                   
+     AccesRight canDeleteProject,  - list of userGroups or assuraces                                   
+     AccesRight canEditProject,    - list of userGroups or assuraces                                   
+     Policy projectActivation  - created | request_suggestion_number | request_suggestion_expression | ranks
+     Policy projectAbort       - request_suggestion_number | request_suggestion_expression | ranks
+
+     AccesRight canCreateProduct,  - list of userGroups or assuraces                                   
+     AccesRight canSupportProduct, - list of userGroups or assuraces                                   
+     AccesRight canSupportProductClose, - list of userGroups or assuraces                                   
+     AccesRight canDeleteProduct,  - list of userGroups or assuraces                                   
+     AccesRight canEditProduct,    - list of userGroups or assuraces                                   
+     Policy productActivation  - created | request_suggestion_number | request_suggestion_expression | ranks
+     Policy productAbort       - request_suggestion_number | request_suggestion_expression | ranks
+
+     AccesRight canCreateFile,   - list of userGroups or assuraces                                   
+     AccesRight canDeleteFile,   - list of userGroups or assuraces                                   
+     AccesRight canEditFile,     - list of userGroups or assuraces                                   
+     AccesRight canDownloadFile, - list of userGroups or assuraces                                   
+	 
+     array of set canComment,    - array of list of userGroups or assuraces key: suggestion|active|closed
+     set caModerateComment,      - list of userGroups or assurances                                      
+
+  if objectType == 'question'
+     bool secretVoks
+     bool enableLikvid
+	 bool enableVoksEdit
+	 bool enableVoksDelete
+	 string valid  - voksCount | expression | always
+     set disq1Termin  - date | number_of_day | expression | ranks
+     set disq2Termin  - date | number_of_day | expression | ranks
+     set voksTermin  - date | number_of_day | expression | ranks
+
+	 obj canView,                  - members|sumSubMembers|regiterd|all and list of userGroups             
+	 obj canVoks,                  - members|sumSubMembers|regiterd|all and list of userGroups
+	 
+	 obj canViewQuestionCreator,   - members|sumSubMembers|regiterd|all and list of userGroups             
+     obj canViewResult,            - members|sumSubMembers|regiterd|all and list of userGroups
+	 bool canViewSubResult
+     set canViewVoters,            - members|sumSubMembers|regiterd|all and list of userGroups
+	 set canViewOptionCreator,     - members|sumSubMembers|regiterd|all and list of userGroups
+	 
+     obj canCreateOption,  - members|sumSubMembers|regiterd|all and list of userGroups or assuraces key:suggestion|disq1|disq2|voks|closed|aborted               
+     obj canSupportOption, - members|sumSubMembers|regiterd|all and list of userGroups or assuraces key:suggestion|disq1|disq2|voks|closed|aborted               
+     obj canDeleteOption,  - members|sumSubMembers|regiterd|all and list of userGroups or assuraces                             
+     obj canEditOption,    - members|sumSubMembers|regiterd|all and list of userGroups or assuraces                             
+     obj optionActivation  - members|sumSubMembers|regiterd|all and list created | request_suggestion_number | request_suggestion_expression | tisztségek
+     obj optionAbort       - members|sumSubMembers|regiterd|all and list request_suggestion_number | request_suggestion_expression | tisztségek
+	 bool canModifyOptionsInDisq2
+	 bool canModifyOptionsInVoks
+
+     obj canComment,               - members|sumSubMembers|regiterd|all and array of list of userGroups or assuraces                                      
+     set canModerateComment,       - list of userGroups or assuraces
+     bool canCommentInSuggestion	 
+     bool canCommentInDisq1	 
+     bool canCommentInDisq2	 
+     bool canCommentInVoks	 
+     bool canCommentInClosed	 
+  
+Comment extends model
+---------------------  
+  int id,
+  string objectType,
+  int object_id,
+  int replyTo,
+  text body,
+  User user,
+  date created
+
+Log extends model
+-----------------
+  int id,
+  string objectType,
+  int object_id,
+  string event,
+  text description
+  datetime eventTime,
+  User user
+  
+   
+Option extends model	
+--------------------
+  int id,
+  string optionKey,
+  int question_id,
+  string title,
+  text description,
+  int state,          - suggestion | active | aborted
+  RecordSet of Suggestion suggestions,
+  Result result,
+  RecordSet of Comment comments,
+  RecordSet of Log logs  
+  User creator,
+  date created
+  
+Voks extends model
+------------------
+  int id,
+  string voksKey,
+  string ballot,
+  int question_id,
+  string questionKey,
+  int option_id
+  string optionKey,
+  int position
+  int voter_id
+  int user_id
+  
+Acredite extends model
+----------------------
+  int id,
+  int category_id,
+  User acredited,
+  User user
+  datetime created
+  
+  
+Condorcet
+---------
+  int id
+  int question_id
+  int voksCount
+  int voterCount
+  bool processed
+  getProcess()
+  object = getMatrix1()
+  object = getMatrix2()
+  object = getInFirst()  
+  object = getAspected()
+  object = getSequence()
+
+
+
+  
+EDE - IDE szavazó szerver kapcsolat	
+-----------------------------------
+
+Ha a globális konfig EDE-IDE használatot ír elõ:
+
+A question és az option adatmodellek add, edit, delete müveleteknél
+az információk egy részét szinkronizálják az EDI-IDE szerveren is (master: myApp -> slave:ADA-IDE szerver)
+
+A voks adatmodel a nyilt szavazásokat és a kéviselõk szavazatait redundánsan maga is tárolja és elküldi 
+az EDA-IDE szerverre is, a többi szavazatot csak az EDE-IDE szerveren tárolja
+
+Eredmény lekérésnél, likvid szavazás esetén a voks adatmodell a szervertõl kapott eredménybõl csak 
+a Matrix1 -et használja, azt modosítja a likvid képviseletbõl adodó 
+sulyozásokkal, ezután megismétli a shulze kiértékelés további lépéseit.
+Nem likvid szavazásoknál a kapott eredményt használja.
+
+Ehhez egy objektumot használ: 
+
+ADA_IDEInteraface
+-----------------
+
+bool = saveQuestion(&$question)
+bool = delQuestion(&$question)
+bool = saveOption(&$question)
+bool = delOption(&$question)
+str  = getBallot($question)
+bool = saveVoks(redirectURI)
+   - A képernyörõl beolvasta a user által kialakitott voksot, 
+   - képezi a szavazo_id -t,
+   - szükség esetén lokálisan tárolja a szavazatot,
+   - ezután kialakitja belõle a user browserén azt a formot ami az EDA_IDE szerver gényel 
+     és azt elküldi az EDE_IDE szervernek.
+   - Ha a visszakapott válasz serint a szavazat tárolása nem történt meg akkor a lokálisan tárolt 
+     szavazatot is törli.
+   
+condorcet = getCondorcet($question)
+   likvid szavazás esetén csak a Matrix1 -et használja
+   
+
+
+
+
+

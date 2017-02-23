@@ -1,0 +1,212 @@
+Likvid demokrácia szoftver
+==========================
+
+V1.00  2017.02.10.
+Szerzõ: Fogler Tibor  tibor.fogler@gmail.com
+
+Változás történet
+
+Könyvtár szerkezet
+------------------
+data                          adatbázis 
+docs                          dokumentációk
+source                        forrás program 
+  objectName
+    modelObjectName.php
+	controllerObjectName.php
+	viewObjectName.php
+	helperObjectname.php
+	htmls
+	  tmplNameObjectname.html
+	js  
+	  tmplNameObjectname.js
+	  ....
+  ...
+  index.php
+joomla_component_install      Joomla component intalláló csomag
+tests                         unittest környezet
+tools                         eszközök
+
+Adat tárolás
+------------
+A modellek a dataStorage objektumot használják külsõ adattárolásra.
+Ez üzemszerüen a mysql -t használja, de van teszt változata is ami
+memoriában tárolt objektumokkal dolgozik.
+
+Objektum szerkezet
+------------------
+globals
+  secret, inpt, session, uri, user, language
+
+FrameworkInterface     
+  secret  
+  templateName
+  language  
+  defTask
+  input        
+  session      
+  uri          
+  user         
+  dataStorage  
+  model
+  view
+  helper
+  __construct(templateName, defTask)  // létrehozza az input, session, user, dataStorage, model, view, helper, lng  objektumokat is   
+  login(usrname, password)
+  logout()
+  lng(token)
+  
+Input
+  get(name,default, tipus)  tipus: int | str | html | file
+  set(name,value, tipus)  
+  
+Session
+  get(name)
+  set(name,value)
+  getToken()
+  chkToken(token)
+
+User
+  id
+  username
+  name
+  email
+  groups
+  state
+  save()
+  regist(username, name, email, groups, state)
+  
+UserGroup
+  int id,
+  string name
+  
+DataStorage  MINDEN ADAT OBJECTUMNAK VAN egyedi, automatikusan képzett id eleme !!!!!
+  recordObject = getItem(tableName, id)
+  arrayOfRecordObject = getItems(tableName, filter, limit, limitStart)
+  arrayOfInteger = getIds(tableName, filter)
+  integer = getCount(tableName, filter)
+  bool = add(tableName, &recordObject)
+  bool = addJson(tableName, jsonStr)
+  bool = edit(tableName, recordObject, filter)
+  bool = delete(tableName, filter)
+  str = getErrorMsg()
+ 
+Controller(FrameWorkInterface)
+   name
+   __construct(name)
+   bool accesControl(objectName, action, user, &msg)
+   exec(task)
+   <task>()
+   ....
+   
+Model(FrameWorkInterface)
+   name
+   controller
+   errorMsg
+   __construct(controller)
+   object = getItem(id)
+   arrayOfObject = getItems(filter, limit, limitstart)
+   arrayOfInteger = getIds(filter)
+   integer = getCount(filter)
+   bool = add(&object)
+   bool = edit(object,filter)
+   bool = delete(filter)
+   bool = check(object)
+   bool = canDelete(object)
+   str = getErrorMsg()
+   paginationObject = getPagination(filter,limitstart,limit)
+   ....
+   
+View(FrameWorkInterface)
+   name
+   controller
+   __construct(controller,model)
+   display(tmplname)   ha van templates/<templateName>/html/<name><tmplname> akkor azt használja
+   displayPagination(paginationObject) // js is tartzik hozzá
+   
+Helper(FrameWorkInterface)   
+   name
+   controller
+   __construct(controller, model, view)
+   
+Pagination
+  [{"title":##,"limitstart":##},...]   
+
+RecordSet
+   recordName
+   filter
+   items
+   loaded
+   __construct(recordname, filter)
+   load()
+   count()   
+   item()
+
+Result
+  question_id
+  __construct($question_id)
+  getMatrix1()
+  getMatrix2()
+  getSequence()  
+   
+
+  
+Könyvtár szerkezet  (web szerverre telpités után)
+-------------------------------------------------
+- megjegyzés: a repoban az installálási szerkezet van, ott a language fájlok a site/language illetve 
+az admin/language könyvtárban vannak 
+
+site
+
+	component_root 
+	   com_likvid.php   // ez a joomla komponens main file, betölti a s, könyvtárakat és a joomlaFrameWorkInterface -t.
+	   index.php        // ez astandalon müködés kezdõlapja, betölti a js, könyvtárakat és a standalonFrameWorkInterface -t.
+	   joomlaFrameworkInterface.php
+	   standalonFrameworkInterface.php
+	   controllers
+		  controller.php
+		  controller<Name>.php
+		  ....
+	   models
+		  model.php
+		  model<Name>.php
+		  ....
+	   views
+		  view.php
+		  pagination.js
+		  view<Name>.php
+		  ...
+		  tmpls
+			tmpl<Name><TmplName>.php
+			tmpl<Name><TmplName>.js
+			....
+	   helpers
+		   helper.php
+		   helper<Name>.php
+	templates
+	  tmplname
+		html
+		  <name>
+			<TmplName>.php
+			<TmplName>.js
+		  ....	
+	language
+	   lng
+		 lng.<com_likvid>.ini
+		 lng.<com_likvid>.<objectname>.ini
+administrator
+    ugyanaz mint ami fentebb a site -ba van.
+	 
+Felhasznált Bootstrap, JQuery könyvtárak	 
+----------------------------------------
+bootstarp szövegszerkesztõ:
+  http://summernote.org/
+Bootstrap JQuery datagrid:
+  http://bootstrap-table.wenzhixin.net.cn/getting-started/
+  https://datatables.net/
+  http://www.jquery-bootgrid.com/
+date-time picker:
+  http://www.malot.fr/bootstrap-datetimepicker/index.php
+checkbox/:
+  https://vsn4ik.github.io/bootstrap-checkbox/
+  

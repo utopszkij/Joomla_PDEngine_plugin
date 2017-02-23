@@ -106,6 +106,7 @@
   * szám = getUserCount($category, $question=0, akció)  az akcióra  jogoultak száma
   *
   */
+  include_once JPATH_SITE.'/components/com_pvoks/joomlaFrameworkInterface.php';
   include_once JPATH_SITE.'/components/com_pvoks/controller.php';
   include_once JPATH_SITE.'/components/com_pvoks/funkciok.php';
   $input = JFactory::getApplication()->input;  

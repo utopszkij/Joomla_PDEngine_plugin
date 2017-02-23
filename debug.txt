@@ -1,0 +1,831 @@
+main
+processDir site
+processDir site/assets
+processFile site/condorcet.php
+adjustCommentBlock
+processCommentBlock i=47
+functionHead i=54       function __construct($db,$temakor_id=0,$szavazas_id=0,$filter='', $fordulo = 0) {
+
+adjustCommentBlock
+functionHead i=66       public function report() {
+
+saveMethod class=Condorcet method=__construct
+adjustCommentBlock
+functionHead i=87       private function getCandidates() {
+
+saveMethod class=Condorcet method=report
+adjustCommentBlock
+functionHead i=100       private function printMatrix($matrix) {
+
+saveMethod class=Condorcet method=getCandidates
+adjustCommentBlock
+processCommentBlock i=133
+functionHead i=138       private function floydWarshall() {
+
+saveMethod class=Condorcet method=printMatrix
+adjustCommentBlock
+functionHead i=174       private function loadDiffMatrix() {
+
+saveMethod class=Condorcet method=floydWarshall
+adjustCommentBlock
+functionHead i=239       private function beatsP($id1,$id2) {
+
+saveMethod class=Condorcet method=loadDiffMatrix
+adjustCommentBlock
+functionHead i=247       private function showlist($shortlist) {
+
+saveMethod class=Condorcet method=beatsP
+adjustCommentBlock
+functionHead i=323       private function findWinner() {
+
+saveMethod class=Condorcet method=showlist
+adjustCommentBlock
+saveMethod class=Condorcet method=findWinner
+saveClass class=Condorcet
+processFile site/controller.php
+processCommentBlock i=1
+adjustCommentBlock
+processCommentBlock i=19
+functionHead i=23     public function szavazok() {
+
+adjustCommentBlock
+processCommentBlock i=62
+functionHead i=66     public function szavazatdelete() {
+
+saveMethod class=PvoksController method=szavazok
+adjustCommentBlock
+processCommentBlock i=104
+functionHead i=108     public function eredmeny() {
+
+saveMethod class=PvoksController method=szavazatdelete
+adjustCommentBlock
+processCommentBlock i=179
+functionHead i=183 	public function szavazatsave() {
+
+saveMethod class=PvoksController method=eredmeny
+adjustCommentBlock
+processCommentBlock i=220
+functionHead i=224 	public function szavazaslist() {
+
+saveMethod class=PvoksController method=szavazatsave
+adjustCommentBlock
+saveMethod class=PvoksController method=szavazaslist
+saveClass class=PvoksController
+processDir site/controllers
+processDir site/helpers
+processDir site/language
+processDir site/models
+processFile site/models/categoryModel.php
+processCommentBlock i=1
+adjustCommentBlock
+functionHead i=8 	public function isMember($user) {
+
+adjustCommentBlock
+functionHead i=12 	public function isSubMember($user) {
+
+saveMethod class=PvoksModelCategory method=isMember
+adjustCommentBlock
+functionHead i=16 	public function isMemberRank($user,$rank) {
+
+saveMethod class=PvoksModelCategory method=isSubMember
+adjustCommentBlock
+saveMethod class=PvoksModelCategory method=isMemberRank
+saveClass class=PvoksModelCategory
+processFile site/models/model.php
+processCommentBlock i=1
+processCommentBlock i=23
+adjustCommentBlock
+adjustCommentBlock
+processCommentBlock i=32
+functionHead i=38 	function __construct($tableName,$filter) {
+
+adjustCommentBlock
+processCommentBlock i=45
+functionHead i=49 	public function getCount() {
+
+saveMethod class=RecordSet method=__construct
+adjustCommentBlock
+processCommentBlock i=55
+functionHead i=60 	public function item($id) {
+
+saveMethod class=RecordSet method=getCount
+adjustCommentBlock
+processCommentBlock i=69
+functionHead i=74 	public function addItem($record) {
+
+saveMethod class=RecordSet method=item
+adjustCommentBlock
+processCommentBlock i=82
+functionHead i=87 	public function editItem($record) {
+
+saveMethod class=RecordSet method=addItem
+adjustCommentBlock
+processCommentBlock i=99
+functionHead i=104 	public function deleteItem($id) {
+
+saveMethod class=RecordSet method=editItem
+adjustCommentBlock
+processCommentBlock i=116
+functionHead i=120 	public function clear() {
+
+saveMethod class=RecordSet method=deleteItem
+adjustCommentBlock
+processCommentBlock i=126
+functionHead i=130 	public function load() {
+
+saveMethod class=RecordSet method=clear
+adjustCommentBlock
+processCommentBlock i=136
+functionHead i=140 	public function save() {
+
+saveMethod class=RecordSet method=load
+adjustCommentBlock
+processCommentBlock i=148
+saveMethod class=RecordSet method=save
+saveClass class=RecordSet
+adjustCommentBlock
+processCommentBlock i=156
+functionHead i=163   function __construct($area, $groups, $ranks) {
+
+adjustCommentBlock
+processCommentBlock i=169
+functionHead i=175   public function check($user,$category) {
+
+saveMethod class=AccessRight method=__construct
+adjustCommentBlock
+processCommentBlock i=209
+functionHead i=213   public function getString() {
+
+saveMethod class=AccessRight method=check
+adjustCommentBlock
+processCommentBlock i=217
+functionHead i=222   public function init($str) {
+
+saveMethod class=AccessRight method=getString
+adjustCommentBlock
+processCommentBlock i=231
+saveMethod class=AccessRight method=init
+saveClass class=AccessRight
+adjustCommentBlock
+functionHead i=236 	function __construct($tableName) {
+
+adjustCommentBlock
+functionHead i=240 	public function load($id) {
+
+saveMethod class=PvoksModel method=__construct
+adjustCommentBlock
+functionHead i=244 	public function store() {
+
+saveMethod class=PvoksModel method=load
+adjustCommentBlock
+functionHead i=248 	public function remove() {
+
+saveMethod class=PvoksModel method=store
+adjustCommentBlock
+functionHead i=252 	public function newRecord() {
+
+saveMethod class=PvoksModel method=remove
+adjustCommentBlock
+functionHead i=256 	public function check() {
+
+saveMethod class=PvoksModel method=newRecord
+adjustCommentBlock
+functionHead i=260 	public function candelete() {
+
+saveMethod class=PvoksModel method=check
+adjustCommentBlock
+functionHead i=264 	public function getItems($filter, $limit=20; $limitstart = 0) {
+
+saveMethod class=PvoksModel method=candelete
+adjustCommentBlock
+functionHead i=268 	public function getTotal($filter) {
+
+saveMethod class=PvoksModel method=getItems
+adjustCommentBlock
+functionHead i=272 	public function getPagination($filter, $limit=20, $limitstart=0) {
+
+saveMethod class=PvoksModel method=getTotal
+adjustCommentBlock
+saveMethod class=PvoksModel method=getPagination
+saveClass class=PvoksModel
+processFile site/models/userModel.php
+processCommentBlock i=1
+adjustCommentBlock
+functionHead i=15 	function __construct() {
+
+adjustCommentBlock
+saveMethod class=PvoksModelUser method=__construct
+saveClass class=PvoksModelUser
+processFile site/pvoks.php
+processCommentBlock i=1
+main
+processDir site
+processDir site/assets
+processFile site/condorcet.php
+adjustCommentBlock
+processCommentBlock i=47
+functionHead i=54       function __construct($db,$temakor_id=0,$szavazas_id=0,$filter='', $fordulo = 0) {
+
+adjustCommentBlock
+functionHead i=66       public function report() {
+
+saveMethod class=Condorcet method=__construct
+adjustCommentBlock
+functionHead i=87       private function getCandidates() {
+
+saveMethod class=Condorcet method=report
+adjustCommentBlock
+functionHead i=100       private function printMatrix($matrix) {
+
+saveMethod class=Condorcet method=getCandidates
+adjustCommentBlock
+processCommentBlock i=133
+functionHead i=138       private function floydWarshall() {
+
+saveMethod class=Condorcet method=printMatrix
+adjustCommentBlock
+functionHead i=174       private function loadDiffMatrix() {
+
+saveMethod class=Condorcet method=floydWarshall
+adjustCommentBlock
+functionHead i=239       private function beatsP($id1,$id2) {
+
+saveMethod class=Condorcet method=loadDiffMatrix
+adjustCommentBlock
+functionHead i=247       private function showlist($shortlist) {
+
+saveMethod class=Condorcet method=beatsP
+adjustCommentBlock
+functionHead i=323       private function findWinner() {
+
+saveMethod class=Condorcet method=showlist
+adjustCommentBlock
+saveMethod class=Condorcet method=findWinner
+saveClass class=Condorcet
+processFile site/controller.php
+processCommentBlock i=1
+adjustCommentBlock
+processCommentBlock i=19
+functionHead i=23     public function szavazok() {
+
+adjustCommentBlock
+processCommentBlock i=62
+functionHead i=66     public function szavazatdelete() {
+
+saveMethod class=PvoksController method=szavazok
+adjustCommentBlock
+processCommentBlock i=104
+functionHead i=108     public function eredmeny() {
+
+saveMethod class=PvoksController method=szavazatdelete
+adjustCommentBlock
+processCommentBlock i=179
+functionHead i=183 	public function szavazatsave() {
+
+saveMethod class=PvoksController method=eredmeny
+adjustCommentBlock
+processCommentBlock i=220
+functionHead i=224 	public function szavazaslist() {
+
+saveMethod class=PvoksController method=szavazatsave
+adjustCommentBlock
+saveMethod class=PvoksController method=szavazaslist
+saveClass class=PvoksController
+processDir site/controllers
+processDir site/helpers
+processDir site/language
+processDir site/models
+processFile site/models/categoryModel.php
+processCommentBlock i=1
+adjustCommentBlock
+functionHead i=8 	public function isMember($user) {
+
+adjustCommentBlock
+functionHead i=12 	public function isSubMember($user) {
+
+saveMethod class=PvoksModelCategory method=isMember
+adjustCommentBlock
+functionHead i=16 	public function isMemberRank($user,$rank) {
+
+saveMethod class=PvoksModelCategory method=isSubMember
+adjustCommentBlock
+saveMethod class=PvoksModelCategory method=isMemberRank
+saveClass class=PvoksModelCategory
+processFile site/models/model.php
+processCommentBlock i=1
+processCommentBlock i=23
+adjustCommentBlock
+adjustCommentBlock
+processCommentBlock i=32
+functionHead i=38 	function __construct($tableName,$filter) {
+
+adjustCommentBlock
+processCommentBlock i=45
+functionHead i=49 	public function getCount() {
+
+saveMethod class=RecordSet method=__construct
+adjustCommentBlock
+processCommentBlock i=55
+functionHead i=60 	public function item($id) {
+
+saveMethod class=RecordSet method=getCount
+adjustCommentBlock
+processCommentBlock i=69
+functionHead i=74 	public function addItem($record) {
+
+saveMethod class=RecordSet method=item
+adjustCommentBlock
+processCommentBlock i=82
+functionHead i=87 	public function editItem($record) {
+
+saveMethod class=RecordSet method=addItem
+adjustCommentBlock
+processCommentBlock i=99
+functionHead i=104 	public function deleteItem($id) {
+
+saveMethod class=RecordSet method=editItem
+adjustCommentBlock
+processCommentBlock i=116
+functionHead i=120 	public function clear() {
+
+saveMethod class=RecordSet method=deleteItem
+adjustCommentBlock
+processCommentBlock i=126
+functionHead i=130 	public function load() {
+
+saveMethod class=RecordSet method=clear
+adjustCommentBlock
+processCommentBlock i=136
+functionHead i=140 	public function save() {
+
+saveMethod class=RecordSet method=load
+adjustCommentBlock
+processCommentBlock i=148
+saveMethod class=RecordSet method=save
+saveClass class=RecordSet
+adjustCommentBlock
+processCommentBlock i=156
+functionHead i=163   function __construct($area, $groups, $ranks) {
+
+adjustCommentBlock
+processCommentBlock i=169
+functionHead i=175   public function check($user,$category) {
+
+saveMethod class=AccessRight method=__construct
+adjustCommentBlock
+processCommentBlock i=209
+functionHead i=213   public function getString() {
+
+saveMethod class=AccessRight method=check
+adjustCommentBlock
+processCommentBlock i=217
+functionHead i=222   public function init($str) {
+
+saveMethod class=AccessRight method=getString
+adjustCommentBlock
+processCommentBlock i=231
+saveMethod class=AccessRight method=init
+saveClass class=AccessRight
+adjustCommentBlock
+functionHead i=236 	function __construct($tableName) {
+
+adjustCommentBlock
+functionHead i=240 	public function load($id) {
+
+saveMethod class=PvoksModel method=__construct
+adjustCommentBlock
+functionHead i=244 	public function store() {
+
+saveMethod class=PvoksModel method=load
+adjustCommentBlock
+functionHead i=248 	public function remove() {
+
+saveMethod class=PvoksModel method=store
+adjustCommentBlock
+functionHead i=252 	public function newRecord() {
+
+saveMethod class=PvoksModel method=remove
+adjustCommentBlock
+functionHead i=256 	public function check() {
+
+saveMethod class=PvoksModel method=newRecord
+adjustCommentBlock
+functionHead i=260 	public function candelete() {
+
+saveMethod class=PvoksModel method=check
+adjustCommentBlock
+functionHead i=264 	public function getItems($filter, $limit=20; $limitstart = 0) {
+
+saveMethod class=PvoksModel method=candelete
+adjustCommentBlock
+functionHead i=268 	public function getTotal($filter) {
+
+saveMethod class=PvoksModel method=getItems
+adjustCommentBlock
+functionHead i=272 	public function getPagination($filter, $limit=20, $limitstart=0) {
+
+saveMethod class=PvoksModel method=getTotal
+adjustCommentBlock
+saveMethod class=PvoksModel method=getPagination
+saveClass class=PvoksModel
+processFile site/models/userModel.php
+processCommentBlock i=1
+adjustCommentBlock
+functionHead i=15 	function __construct() {
+
+adjustCommentBlock
+saveMethod class=PvoksModelUser method=__construct
+saveClass class=PvoksModelUser
+processFile site/pvoks.php
+processCommentBlock i=1
+processDir site/views
+processDir admin
+processDir admin/assets
+processDir admin/controllers
+processFile admin/controllers/acrediteds.php
+processCommentBlock i=1
+adjustCommentBlock
+functionHead i=15     function __construct() {
+
+adjustCommentBlock
+processCommentBlock i=27
+functionHead i=30 	protected function editNewInit(&$jform) {
+
+saveMethod class=PvoksControllerAcrediteds method=__construct
+adjustCommentBlock
+saveMethod class=PvoksControllerAcrediteds method=editNewInit
+saveClass class=PvoksControllerAcrediteds
+processFile admin/controllers/categories.php
+processCommentBlock i=1
+adjustCommentBlock
+functionHead i=15     function __construct() {
+
+adjustCommentBlock
+processCommentBlock i=27
+functionHead i=30 	protected function editNewInit(&$jform) {
+
+saveMethod class=PvoksControllerCategories method=__construct
+adjustCommentBlock
+saveMethod class=PvoksControllerCategories method=editNewInit
+saveClass class=PvoksControllerCategories
+processFile admin/controllers/configs.php
+processCommentBlock i=1
+adjustCommentBlock
+functionHead i=15     function __construct() {
+
+adjustCommentBlock
+processCommentBlock i=27
+functionHead i=30 	protected function editNewInit(&$jform) {
+
+saveMethod class=PvoksControllerConfigs method=__construct
+adjustCommentBlock
+saveMethod class=PvoksControllerConfigs method=editNewInit
+saveClass class=PvoksControllerConfigs
+processFile admin/controllers/controller.php
+processCommentBlock i=1
+adjustCommentBlock
+functionHead i=24     function __construct() {
+
+adjustCommentBlock
+functionHead i=36 	public function setViewName($viewName) {
+
+saveMethod class=PvoksController method=__construct
+adjustCommentBlock
+processCommentBlock i=42
+functionHead i=48 	protected function accessControl($task,$item) {
+
+saveMethod class=PvoksController method=setViewName
+adjustCommentBlock
+processCommentBlock i=54
+functionHead i=59 	protected function browseButtons() {
+
+saveMethod class=PvoksController method=accessControl
+adjustCommentBlock
+processCommentBlock i=68
+functionHead i=73 	protected function addButtons() {	
+
+saveMethod class=PvoksController method=browseButtons
+adjustCommentBlock
+processCommentBlock i=81
+functionHead i=86 	protected function editButtons() {
+
+saveMethod class=PvoksController method=addButtons
+adjustCommentBlock
+processCommentBlock i=93
+functionHead i=96 	protected function editNewInit(&$jform) {
+
+saveMethod class=PvoksController method=editButtons
+adjustCommentBlock
+processCommentBlock i=100
+functionHead i=104 	public function execute($task = '') {
+
+saveMethod class=PvoksController method=editNewInit
+adjustCommentBlock
+functionHead i=112 	public function getModel($modelName = '') {
+
+saveMethod class=PvoksController method=execute
+adjustCommentBlock
+functionHead i=118 	public function getView($viewName='', $viewType='html') {
+
+saveMethod class=PvoksController method=getModel
+adjustCommentBlock
+functionHead i=123 	protected function getForm() {
+
+saveMethod class=PvoksController method=getView
+adjustCommentBlock
+processCommentBlock i=127
+functionHead i=132 	public function browse($msg = '', $msgClass = 'info') {
+
+saveMethod class=PvoksController method=getForm
+adjustCommentBlock
+processCommentBlock i=164
+functionHead i=172 	public function add($msg = '', $msgClass = 'info') {
+
+saveMethod class=PvoksController method=browse
+adjustCommentBlock
+processCommentBlock i=213
+functionHead i=222 	public function edit($msg = '', $msgClass = 'info') {
+
+saveMethod class=PvoksController method=add
+adjustCommentBlock
+processCommentBlock i=278
+functionHead i=281 	public function save() {
+
+saveMethod class=PvoksController method=edit
+adjustCommentBlock
+processCommentBlock i=311
+functionHead i=314 	public function delete() {
+
+saveMethod class=PvoksController method=save
+adjustCommentBlock
+processCommentBlock i=337
+functionHead i=340 	public function savenew() {
+
+saveMethod class=PvoksController method=delete
+adjustCommentBlock
+saveMethod class=PvoksController method=savenew
+saveClass class=PvoksController
+processFile admin/controllers/members.php
+processCommentBlock i=1
+adjustCommentBlock
+functionHead i=15     function __construct() {
+
+adjustCommentBlock
+processCommentBlock i=27
+functionHead i=30 	protected function editNewInit(&$jform) {
+
+saveMethod class=PvoksControllerMembers method=__construct
+adjustCommentBlock
+saveMethod class=PvoksControllerMembers method=editNewInit
+saveClass class=PvoksControllerMembers
+processFile admin/controllers/options.php
+processCommentBlock i=1
+adjustCommentBlock
+functionHead i=15     function __construct() {
+
+adjustCommentBlock
+processCommentBlock i=27
+functionHead i=30 	protected function editNewInit(&$jform) {
+
+saveMethod class=PvoksControllerOptions method=__construct
+adjustCommentBlock
+saveMethod class=PvoksControllerOptions method=editNewInit
+saveClass class=PvoksControllerOptions
+processFile admin/controllers/questions.php
+processCommentBlock i=1
+adjustCommentBlock
+functionHead i=15     function __construct() {
+
+adjustCommentBlock
+processCommentBlock i=27
+functionHead i=32 	protected function browseButtons() {
+
+saveMethod class=PvoksControllerQuestions method=__construct
+adjustCommentBlock
+processCommentBlock i=39
+functionHead i=42 	protected function editNewInit(&$jform) {
+
+saveMethod class=PvoksControllerQuestions method=browseButtons
+adjustCommentBlock
+processCommentBlock i=49
+functionHead i=53 	public function copy() {
+
+saveMethod class=PvoksControllerQuestions method=editNewInit
+adjustCommentBlock
+processCommentBlock i=97
+functionHead i=100 	public function save() {
+
+saveMethod class=PvoksControllerQuestions method=copy
+adjustCommentBlock
+saveMethod class=PvoksControllerQuestions method=save
+saveClass class=PvoksControllerQuestions
+processFile admin/controllers/supports.php
+processCommentBlock i=1
+adjustCommentBlock
+functionHead i=15     function __construct() {
+
+adjustCommentBlock
+saveMethod class=PvoksControllerSupports method=__construct
+saveClass class=PvoksControllerSupports
+processFile admin/controllers/voters.php
+processCommentBlock i=1
+adjustCommentBlock
+functionHead i=15     function __construct() {
+
+adjustCommentBlock
+saveMethod class=PvoksControllerVoters method=__construct
+saveClass class=PvoksControllerVoters
+processDir admin/helpers
+processFile admin/helpers/pvoks.php
+processCommentBlock i=1
+adjustCommentBlock
+functionHead i=11   public function echoPvoksHeader() { 	
+
+adjustCommentBlock
+processCommentBlock i=51
+functionHead i=58 	function echoColHeader($label, $field, $listDirn, $listOrder) {
+
+saveMethod class=PvoksHelper method=echoPvoksHeader
+adjustCommentBlock
+functionHead i=78 	public function echoControlPanel() {
+
+saveMethod class=PvoksHelper method=echoColHeader
+adjustCommentBlock
+processCommentBlock i=108
+functionHead i=114 	function echoCategoryOptions($parent, $s, $actValue) {
+
+saveMethod class=PvoksHelper method=echoControlPanel
+adjustCommentBlock
+processCommentBlock i=129
+functionHead i=133 	public function getImgSrc(&$text, $clear = false) {
+
+saveMethod class=PvoksHelper method=echoCategoryOptions
+adjustCommentBlock
+saveMethod class=PvoksHelper method=getImgSrc
+saveClass class=PvoksHelper
+processDir admin/language
+processDir admin/models
+processFile admin/models/acrediteds.php
+processCommentBlock i=1
+adjustCommentBlock
+functionHead i=15 	function __construct() {
+
+adjustCommentBlock
+processCommentBlock i=23
+functionHead i=28 	protected function getListQuery()	{
+
+saveMethod class=PvoksModelAcrediteds method=__construct
+adjustCommentBlock
+processCommentBlock i=64
+functionHead i=70 	public function canDelete($id) {
+
+saveMethod class=PvoksModelAcrediteds method=getListQuery
+adjustCommentBlock
+processCommentBlock i=75
+functionHead i=81 	public function check($item) {
+
+saveMethod class=PvoksModelAcrediteds method=canDelete
+adjustCommentBlock
+processCommentBlock i=166
+functionHead i=172 	public function getItem($id=0) {
+
+saveMethod class=PvoksModelAcrediteds method=check
+adjustCommentBlock
+processCommentBlock i=196
+functionHead i=201 	public function save($item) {
+
+saveMethod class=PvoksModelAcrediteds method=getItem
+adjustCommentBlock
+saveMethod class=PvoksModelAcrediteds method=save
+saveClass class=PvoksModelAcrediteds
+processFile admin/models/categories.php
+processCommentBlock i=1
+adjustCommentBlock
+functionHead i=15 	function __construct() {
+
+adjustCommentBlock
+processCommentBlock i=23
+functionHead i=28 	protected function getListQuery()	{
+
+saveMethod class=PvoksModelCategories method=__construct
+adjustCommentBlock
+processCommentBlock i=51
+functionHead i=54 	protected function getTree(&$result, $parent, $s) {
+
+saveMethod class=PvoksModelCategories method=getListQuery
+adjustCommentBlock
+processCommentBlock i=69
+functionHead i=74 	public function getItems() {
+
+saveMethod class=PvoksModelCategories method=getTree
+adjustCommentBlock
+processCommentBlock i=89
+functionHead i=95 	public function canDelete($id) {
+
+saveMethod class=PvoksModelCategories method=getItems
+adjustCommentBlock
+processCommentBlock i=115
+functionHead i=121 	public function check(&$item) {
+
+saveMethod class=PvoksModelCategories method=canDelete
+adjustCommentBlock
+processCommentBlock i=156
+functionHead i=162 	public function getItem($id=0) {
+
+saveMethod class=PvoksModelCategories method=check
+adjustCommentBlock
+processCommentBlock i=182
+functionHead i=187 	public function save($item) {
+
+saveMethod class=PvoksModelCategories method=getItem
+adjustCommentBlock
+processCommentBlock i=207
+functionHead i=211 	public function delete($ids) {
+
+saveMethod class=PvoksModelCategories method=save
+adjustCommentBlock
+saveMethod class=PvoksModelCategories method=delete
+saveClass class=PvoksModelCategories
+processFile admin/models/configs.php
+processCommentBlock i=1
+adjustCommentBlock
+functionHead i=15 	function __construct() {
+
+adjustCommentBlock
+processCommentBlock i=23
+functionHead i=28 	protected function getListQuery()	{
+
+saveMethod class=PvoksModelConfigs method=__construct
+adjustCommentBlock
+processCommentBlock i=50
+functionHead i=56 	public function canDelete($id) {
+
+saveMethod class=PvoksModelConfigs method=getListQuery
+adjustCommentBlock
+processCommentBlock i=84
+functionHead i=90 	public function check($item) {
+
+saveMethod class=PvoksModelConfigs method=canDelete
+adjustCommentBlock
+processCommentBlock i=114
+functionHead i=120 	public function getItem($id=0) {
+
+saveMethod class=PvoksModelConfigs method=check
+adjustCommentBlock
+processCommentBlock i=139
+functionHead i=144 	public function save($item) {
+
+saveMethod class=PvoksModelConfigs method=getItem
+adjustCommentBlock
+saveMethod class=PvoksModelConfigs method=save
+saveClass class=PvoksModelConfigs
+processDir admin/models/forms
+processFile admin/models/members.php
+processCommentBlock i=1
+adjustCommentBlock
+functionHead i=15 	function __construct() {
+
+adjustCommentBlock
+processCommentBlock i=23
+functionHead i=28 	protected function getListQuery()	{
+
+saveMethod class=PvoksModelMembers method=__construct
+adjustCommentBlock
+processCommentBlock i=63
+functionHead i=69 	public function canDelete($id) {
+
+saveMethod class=PvoksModelMembers method=getListQuery
+adjustCommentBlock
+processCommentBlock i=74
+functionHead i=80 	public function check($item) {
+
+saveMethod class=PvoksModelMembers method=canDelete
+adjustCommentBlock
+processCommentBlock i=91
+functionHead i=97 	public function getItem($id=0) {
+
+saveMethod class=PvoksModelMembers method=check
+adjustCommentBlock
+processCommentBlock i=119
+functionHead i=124 	public function save($item) {
+
+saveMethod class=PvoksModelMembers method=getItem
+adjustCommentBlock
+saveMethod class=PvoksModelMembers method=save
+saveClass class=PvoksModelMembers
+processFile admin/models/model.php
+processCommentBlock i=1
+adjustCommentBlock
+functionHead i=21 	function __create() {
+
+adjustCommentBlock
+processCommentBlock i=27
+functionHead i=32 	protected function getListQuery()	{
+
+saveMethod class=PvoksModel method=__create
+adjustCommentBlock
+processCommentBlock i=51
+functionHead i=57 	public function canDelete($id) {
+
+saveMethod class=PvoksModel method=getListQuery
+adjustCommentBlock

@@ -1,28 +1,40 @@
-Preferenciális szavazási rendszer
-Joomla 3.x component
+Likvid demokrácia szoftver
+--------------------------
 
+Tulajdonságok
+- opcionálisan Joomla komponens vagy standalon web alkalmazás,
+- EDE - ADA login támogatása,
+- EDE - IDE szavazó motor támogatás,
 
-lásd:
-https://drive.google.com/drive/folders/0ByO-4pNpHazzM29RdG9uLTFKcWM?usp=sharing
+- fa szerkezetü témakör (csoport) rendszer,
+- témakör (csoport) esemény történet napló,
+- témakör (csoport) konfigurálási lehetõségek,
+- témakör (csoport) tagok (státusz: meghivott, jelentkezett, javasolt, tag, kizárt,  szavazatsuly:#|képviselö),
+- témakör (csoport) tagonként aktivitás történet, 
+- témakör (csoport) tisztségviselõk (jogok: [admin,...képviselõ, delegált] állapotok: [jelentkezett,javasolt, aktiv]),
+   -- láthatósági politika,
+   -- tagság politika (bekerülés módja, kizárás módja, szavazat súly szabályok, likvid képviselet van?, delegálás van?)
+   -- tisztségviselõ politika, (kinevezás módja visszavonás módja, tisztségek)
+   -- delegálási politika, (delegáltak száma, ügrend)
+   -- altémakör létrehozási politika, (kik hozhatnak létre?, kik törölhetnek?, ügyrend)
+   -- default altémakör konfigurálás,
+   -- szavazás (kérdés) létrehozási politika, (kik hozhatnak létre?, kik törölhetnek?, ügyrend)
+   -- default szavazás (kérdés) konfigurálás,
+- támakörön belül lehetnek szavazások (kérdések), szavazás (kérdés) javaslatok (állapot: javaslat, altJav, vita, szavazas, lezart, elvetve),
+   -- vita/szavazás ügyrendje, (alt javaslat, vita, szavazás idõtartam, feltételek)
+   -- komment politika, (melyik fázisban, ki kommentelhet)
+   -- alternativa hozzáadási politika, (kik tehetik? támogats/elfogadás ügyrend)
+- szavazás (kérdés) esemény történet,   
+- szavazáson belül lehetnek alternatívák (állapot: javasolt, elfogadott),
+- témakörönként (csoportonként) lehet szavazat átruházásokat megadni (képviselet), illetve ezt modosítani, visszavonni,
+- preferenciális szavazás, ügyrendtõl függõen modositás, törlés is lehetséges,
+- Condorcer - Schulze kiértékelés (szavazat átruházásokat is kezelve),
 
-Funkciók:
-- kategóriák kezelése (fa szerkezet)
-- kategória javaslatok, támogatások kezelése
-- kategória tagság/admin jogok kezelése
-- kategória tagsági jelentkezések/javaslatok kezelése
-- kategóriánként képviseleti megbizások kezelése
-- kérdések (szavazások) kezelése
-- kérdés javaslatok, támogatások kezelése
-- opciók (választási lehetőségek) kezelése
-- opció javaslatok, támogatások kezelése
-- preferenciális szavazás
-- condorcet kiértékelés
-- konfigurálási lehetőségek 
-   -- kategória tipusok (állapotok, jogok, nyelvi file, plugin)
-   -- szavazás tipusok (állapotok, jogok)
-   -- bejelentkezési mód (ADA, joomla, ADA+joomla)
-   -- szavazó motor (beépített vagy külső)
-- plugin kodok kezelése
+Nyelv: PHP, HTML, JS, bootstrap, JQuery, Joomla framework
 
+Licensz: GNU/GPL
+
+képernyők, Funkciók
+https://docs.google.com/document/d/1IMVUHKXVlFOPmpBMimXQ1Q5dRO7ZsYsFgDAikxpjiBQ/edit?usp=sharing
 
 

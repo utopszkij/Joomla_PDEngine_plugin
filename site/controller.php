@@ -13,7 +13,7 @@
   include_once JPATH_SITE.'/components/com_pvoks/funkciok.php';
   
   // ================ controller ==============================
-  class pvoksController extends JControllerLegacy {
+  class PvoksController extends JControllerLegacy {
 	  
 	protected $defCatid = 8; // default szavazás kategória
 	
