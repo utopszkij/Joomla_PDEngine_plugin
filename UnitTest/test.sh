@@ -1,2 +1,2 @@
-phpunit --stderr site
-phpunit --stderr admin
+phpunit --stderr UnitTest/site
+phpunit --stderr UnitTest/admin
